@@ -1,0 +1,2322 @@
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+div, p{
+	cursor: default;
+}
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+img,
+object,
+embed {max-width: 100%;}
+html {overflow-y: auto;}
+ul,li {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, 
+blockquote:after, 
+q:before, 
+q:after {content: ''; content: none;}
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;text-decoration: none;color: #408EF8;}
+a:hover{
+	text-decoration: underline;
+}
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* tables still need cellspacing="0" in the markup */
+table {border-collapse: collapse; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle;}
+textarea{resize: none;}
+pre {
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+ 
+/* Accessible focus treatment
+	people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active {outline: none;}
+a{
+	-webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+}
+small {font-size: 85%;}
+
+strong, th {font-weight: bold;}
+
+td, td img {vertical-align: top;} 
+
+/* Make sure sup and sub don't screw with your line-heights
+	gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+input[type=button], 
+input[type=submit], 
+input[type=reset],
+button {
+	cursor: pointer;
+	-webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+	}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button {width: auto; overflow: visible;}
+ 
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover */
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+
+/* let's clear some floats */
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
+.clearfix:after { clear: both; }  
+.clearfix { zoom: 1; }  
+
+
+
+/* Ok, this is where the fun starts.
+-------------------------------------------------------------------------------*/
+
+/* new Linux- and Windows-friendly sans-serif font stack: http://mky.be/fontstack */
+body {font:13px sans-serif;}
+
+/* using local fonts? make sure to read up on Paul Irish's 
+	Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/ */
+
+/* we like off-black for text */
+body, select, input, textarea {color: #333;}
+
+/* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
+::-moz-selection{background: #826DC9; color: #fff; text-shadow: none;}
+::selection {background: #826DC9; color: #fff; text-shadow: none;} 
+
+/*	j.mp/webkit-tap-highlight-color */
+a:link {-webkit-tap-highlight-color: #826DC9;} 
+
+ins {background-color: #826DC9; color: #fff; text-decoration: none;}
+mark {background-color: #826DC9; color: #fff; font-style: italic; font-weight: bold;}
+
+/* Print styles!
+-------------------------------------------------------------------------------*/
+@media print {
+
+}
+/* Media queries!
+-------------------------------------------------------------------------------*/
+/* Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {
+	
+}
+
+@media all and (orientation: portrait) {
+	
+}
+
+@media all and (orientation: landscape) {
+	
+}
+
+/*global class*/
+
+@font-face {
+    font-family: "GraublauWeb";
+    src: url("../font/GraublauWeb.otf") format("opentype");
+}
+@font-face {
+    font-family: "Tallys";
+    src: url("../font/Tallys_15.otf") format("opentype");
+}
+@font-face {
+    font-family: "GraublauWeb";
+    font-weight: 900;
+    src: url("../font/GraublauWebBold.otf") format("opentype");
+}
+.graublau {
+    color: #999999;
+    font-family: GraublauWeb,Verdana,Arial,Helvetica,sans-serif;
+    font-size: 34px;
+}
+
+@font-face{
+    font-family: 'WebRupee';src: url('../font/WebRupee.V2.0.eot');src: local('WebRupee'),
+    url('../font/WebRupee.V2.0.ttf') format('truetype'),
+    url('../font/WebRupee.V2.0.woff') format('woff'),
+    url('../font/WebRupee.V2.0.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.WebRupee{
+	font-family: 'WebRupee';
+	font-size:50px;
+	position: relative;
+	top: -38px;
+	color: #666;
+}
+body, ul, li, div, span, a, p, img, select{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+}
+input{
+    margin: 0;
+    padding: 0;
+}
+p{
+	color: #666;
+    font: 13px/18px arial,helvetica,sans-serif;
+}
+body{
+    width: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+.wrapper{
+    width: 960px;
+    min-height:500px;
+    margin: 0 auto;
+}
+
+
+.width20{
+	width: 20%;
+}
+.width25{
+	width: 25%;
+}
+.width28{
+	width: 28%;
+}
+.width35{
+	width: 35%;
+}
+.width37{
+	width: 37%;
+}
+.width50{
+	width: 50%;
+}
+.width60{
+	width: 60%;
+}
+.width80{
+	width: 80%;
+}
+.width90{
+	width: 90%;
+}
+.width95{
+	width: 95% !important;
+}
+.width100{
+	width:100% !important;
+}
+.wid50{
+	width: 50px;
+}
+.wid60{
+	width: 60px;
+}
+.wid70{
+	width: 70px;
+}
+.wid80{
+	width: 80px;
+}
+.wid90{
+	width: 90px !important;
+}
+.wid100{
+	width: 100px !important;
+}
+.wid110{
+	width: 110px !important;
+}
+.wid120{
+	width: 120px !important;
+}
+.wid130{
+	width: 130px !important;
+}
+.wid140{
+	width: 140px !important;
+}
+.wid150{
+	width: 150px !important;
+}
+.wid160{
+	width: 160px !important;
+}
+.wid166{
+	width: 166px !important;
+}
+.wid170{
+	width: 170px !important;
+}
+.wid180{
+	width: 180px !important;
+}
+.wid200{
+	width: 200px !important;
+}
+.wid220{
+	width: 220px;
+}
+.wid270{
+	width: 270px;
+}
+.wid300{
+	width: 300px;
+}
+.floatL{
+	float: left !important;
+}
+.floatR{
+	float: right !important;
+}
+.floatN{
+	float: none !important;
+}
+.textA{
+	text-align: left !important;
+}
+.textAc{
+	text-align: center !important;
+}
+.textAj{
+	text-align: justify !important;
+}
+.mT5{
+	margin-top: 5px !important;
+}
+.mT0{
+	margin-top: 0 !important;
+}
+.mL5{
+	margin: 0 0 0 5px !important;
+}
+.mL24{
+	margin-left:24px !important;
+}
+.mL30{
+	margin-left: 30px !important;
+}
+.mR5{
+	margin-right:5px;
+}
+.mR10{
+	margin-right:10px;
+}
+.mR14{
+	margin-right:14px;
+}
+.mR20{
+	margin-right:20px !important;
+}
+.mR60{
+	margin-right: 60px !important;
+}
+.mR70{
+	margin-right: 70px !important;
+}
+.mB5{
+	margin:0 0 5px 0 !important;
+}
+.mB10{
+	margin:0 0 10px 0 !important;
+}
+.mB20{
+	margin-bottom: 20px !important;
+}
+.mB25{
+	margin-bottom: 25px !important;
+}
+.mB15{
+	margin-bottom: 15px !important;
+}
+.mB0{
+	margin-bottom: 0 !important;
+}
+.mT8{
+	margin-top:8px !important;
+}
+.mT10{
+	margin:10px 0 0 0 !important;
+}
+.mT12{
+	margin:12px 0 0 0 !important;
+}
+.mT15{
+	margin-top:15px !important;
+}
+.mTB10{
+	margin: 10px 0 !important;
+}
+.mT20{
+	margin:20px 0 0 0 !important;
+}
+.mT30{
+	margin-top: 30px !important;
+}
+.mTB20{
+	margin:20px 0 20px 0 !important;
+}
+.mTB30{
+	margin:30px 0 20px 0 !important;
+}
+.mR5{
+	margin-right: 5px !important;
+}
+.mT4{
+	margin-top: 4px !important;
+}
+.mT25{
+	margin-top: 25px !important;
+}
+.mT40{
+	margin-top: 40px !important;
+}
+.mTR20{
+	margin-top: 20px !important;
+	margin-right: 20px !important;
+}
+.mTnone{
+	margin-top: 0px !important;
+}
+.right-m2{
+	margin-right: 2%;
+}
+.left-m40{
+	margin-left:40%;
+}
+.mL8{
+	margin-left: 8px !important;
+}
+.mTB12{
+	margin: 12px 0 !important;
+}
+.pmB10{
+	padding-bottom: 10px !important;
+	margin-bottom: 10px !important;
+}
+.pB10{
+	padding-bottom: 10px !important;
+}
+.pT10{
+	padding-top: 10px !important;
+}
+.pB15{
+	padding-bottom: 15px !important;
+}
+.pTB15{
+	padding:15px 0  !important;
+}
+.no-padd{
+	padding: 0 !important;
+}
+.mL0{
+	margin-left: 0 !important;
+}
+.no-marg{
+	margin-bottom: 0 !important;
+	margin-left: 0 !important;
+	margin-top: 0 !important;
+	margin-right: 0 !important;
+}
+.noBord{
+	border: 0 !important;
+}
+.color{
+	color: #7C51A1 !important;
+}
+.red{
+	color:#FF0751 !important;
+}
+.green{
+	color: green !important;
+}
+.fWb{
+	font-weight: bold !important;
+}
+.foot{
+	position: absolute !important;
+	bottom: 0 !important;
+}
+/*global buttons*/
+.type1{
+    float: left;
+    font: normal 12px/14px arial,tahoma,sans-serif;
+    color: #7c51a1;
+    text-decoration: none;
+    text-transform: capitalize;
+    border: 1px solid #f1effa;
+    background:#f1effa;
+    padding:2px 6px;
+    box-shadow: 0 0 0 0;
+    margin: 0;
+}
+.type1:hover{
+    background: #7c51a1;
+    color: #f1effa;
+    border: 1px solid #7c51a1;
+	text-decoration: none;
+}
+.type1b{
+	height: 22px;
+    float: left;
+    font: normal 12px/14px arial,tahoma,sans-serif;
+    color: #7c51a1;
+    text-decoration: none;
+    text-transform: capitalize;
+    background:#f1effa;
+    padding:0 14px;
+    border: 0;
+    margin: 0;
+}
+.type1b:hover{
+    background: #7c51a1;
+    color: #f1effa;
+    border: 0 !important;
+	text-decoration: none;
+}
+.type2{
+    width:65px !important;
+    background:#f1effa !important;
+    color: #7c51a1 !important;
+    float: right;
+    font:normal 12px/22px arial,helvetica,sans-serif;
+    margin:18px 0 0 0;
+    text-align: center;
+    text-decoration: none;
+    padding:1px 0 0 !important;
+    border: none 0 !important;
+}
+.type2:hover{
+    background:#7c51a1 !important;
+    color:#f1effa !important;
+    text-decoration:none !important;
+}
+.type2b{
+    width:65px;
+	height: 23px;
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: right;
+    font: 12px/22px arial,helvetica,sans-serif;
+    margin:18px 0 0 0;
+    text-align: center;
+    text-decoration: none;
+	padding:0 !important;
+	border: none 0;
+}
+.type2b:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type3{
+    width:65px;
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 12px/22px arial,helvetica,sans-serif;
+    height: 23px;
+    margin:0 10px 0 0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 !important;
+	border: none 0;
+}
+.type3:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type4{
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: right;
+    font: 12px/22px arial,helvetica,sans-serif;
+    height: 23px;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 10px !important;
+	border: 0 !important;
+}
+.type4:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type5{
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 12px/22px arial,helvetica,sans-serif;
+    height: 23px;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 12px !important;
+	border: 0 !important;
+}
+.type5:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type6{
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 12px/24px arial,helvetica,sans-serif;
+    height: 23px;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 12px !important;
+	position: absolute;
+}
+.type6:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type7{
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 11px/20px arial,helvetica,sans-serif;
+    height: 20px;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 12px !important;
+	position: absolute;
+}
+.type7:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.type8{
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 14px/22px arial,helvetica,sans-serif;
+    height: 23px;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+	padding: 0 20px !important;
+}
+.type8:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.min-height{
+	min-height: 215px !important;
+}
+.next{
+    width: 100px;
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: right;
+    font: 16px/28px arial,helvetica,sans-serif;
+    height: 28px;
+    margin:19px 10% 0 0;
+    text-align: center;
+    text-decoration: none !important;
+}
+.next:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+.upload{
+	width: 260px;
+    background: none repeat scroll 0 0 #f1effa;
+    color: #7c51a1;
+    float: left;
+    font: 16px/28px arial,helvetica,sans-serif;
+    height: 28px;
+    margin:0;
+    text-align: center;
+    text-decoration: none !important;
+	text-transform: uppercase;
+}
+.upload:hover{
+    background: #7c51a1;
+    color: #f1effa;
+	text-decoration: none !important;
+}
+input[type="text"] {
+	height: 20px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+	padding-left: 4px;
+}
+
+select {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+    margin: 0;
+    padding: 2px;
+}
+textarea {
+    background-color: #FFFFFF;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+    padding: 5px;
+}
+h1{
+	color: #7C51A1;
+    font-family: 'Roboto Condensed',Verdana,Arial,Helvetica,sans-serif;
+    font-size: 25px;
+	font-weight: 400;
+	float: left;
+}
+h2{
+	font-family: 'Roboto Condensed',Verdana,Arial,Helvetica,sans-serif;
+    font-size: 16px;
+	line-height: 18px;
+	font-weight: 400;
+	color: #666;
+	text-align: left;
+}
+h3{
+	font-family: 'Roboto Condensed',Verdana,Arial,Helvetica,sans-serif;
+    font-size: 18px;
+	line-height: 20px;
+	font-weight: 400;
+	color: #7C51A1;
+	float: left;
+}
+h4{
+	font: normal 16px/18px arial,helvetica,sans-serif;
+	color: #666;
+	float: left;
+}
+h5{
+	font: normal 11px/12px arial,helvetica,sans-serif;
+	color: #666;
+	float: left;
+}
+.upPhotoM{
+	margin: 30px 0 6px 0 !important;
+}
+.whoM{
+	margin:0 0 30px 0 !important;
+}
+.pop-contnr{
+/*	width: 100%;
+	float: left;
+	position: absolute;
+	left: 0;
+	top: 0;*/
+}
+.wrapper-popup{
+    width: 730px;
+    margin: 0 auto;
+}
+.pop-data-contnr{
+	margin-top:10px;
+    padding: 10px;
+	float: left;
+	background: #f8f8f8;
+	position: relative;
+}
+.pop-close{
+	width: 24px;
+	height:24px;
+	background: #F1EFFA;
+	color: #826DC9;
+    font: bold 13px/21px arial,helvetica,sans-serif;
+	text-decoration: none;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	position: absolute;
+	right: -5px;
+	top: -5px;
+	text-align: center;
+}
+.pop-close:hover{
+	background: #826DC9;
+	color: #F1EFFA;
+	text-decoration: none;
+}
+.pop-closed{
+	width: 24px;
+	height:24px;
+	background: #F1EFFA;
+	color: #826DC9;
+    font: bold 13px/21px arial,helvetica,sans-serif;
+	text-decoration: none;
+	border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	position: absolute;
+	right: -5px;
+	top: 0px;
+	text-align: center;
+	display: block;
+	z-index: 77;
+}
+.pop-closed:hover{
+	background: #826DC9;
+	color: #F1EFFA;
+	text-decoration: none;
+}
+.pop-data-contnr article.section{
+	background: #fff;
+	padding:0 10px;
+}
+.pop-data-contnr article.section ul{
+	padding-bottom: 10px !important;
+}
+.pop-data-contnr article.section .pop-check{
+	margin: 0 15px 10px 0 !important;
+}
+.subWrapper{
+	width: 810px; /*800px*/
+	margin: 0 auto;
+	position: relative;
+}
+.subHead{
+	width: 100%;
+	min-height: 30px;
+	float: left;
+	border-bottom: 1px solid #E3E3E4;
+	position: relative;
+	z-index: 7;
+	box-shadow: 0 5px 10px #F9F9F9;
+}
+.subHead h1{
+	width: 100%;
+	margin: 2px 0 2px 0;
+}
+.subHead h5{
+	width: 100%;
+	float: left;
+	color: #7C51A1;
+	margin-bottom: 10px;
+}
+.btns{
+	width: 60%;
+	float: left;
+	position: relative;
+	z-index: 1;
+	margin:6px 0 0 28%;
+}
+.btns a{
+	margin:0 4px 0 0;
+}
+.photoRoll{
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #c9cacb;
+}
+.photoRoll a{
+	float: left;
+	margin:6px 6px 6px 0;
+}
+.photoRoll img{
+	height: 100px;
+	float: left;
+}
+.photoCont{
+	width: 100%;
+	position: relative;
+	float: left;
+	text-align: center;
+}
+.photoCont .photoWrap{
+	padding:0 20px;
+	position: relative;
+	display:inline;
+}
+.photoCont .photoWrap .nex{
+	width: 40px;
+	height: 100px;
+	position: absolute;
+	right: -15px;
+	top: -280px;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -999px -40px;
+}
+.photoCont .photoWrap .nex:hover{
+	background-position:-999px -151px;
+}
+.photoCont .photoWrap .prevs{
+	width: 40px;
+	height: 100px;
+	position: absolute;
+	left: -20px;
+	top: -280px;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -932px -40px;
+}
+.photoCont .photoWrap .prevs:hover{
+	background-position:-932px -151px;
+}
+.photoCont img{
+	display: inline-block;
+	margin-top: 6px;
+}
+.subContnr{
+	width: 100%;
+	min-height: 0px;
+	max-height: 490px;
+	padding-bottom: 20px;
+	float: left;
+	position: relative;
+	overflow-y: auto;
+}
+.subContnr p{
+	width: 98.6%;
+	float: left;
+	margin: 0 0 10px;
+	text-align: justify;
+}
+.subFooter{
+    width: 810px;
+    float: left;
+    height: 20px;
+    background: #7c51a1;
+	position: absolute;
+	z-index: 7;
+	left: -1px;
+	bottom: -1px;
+}
+.subFooter ul.footer-links{
+    width:100%;
+    list-style: none;
+    margin-top:4px !important;
+    margin: 0 auto;
+}
+.subFooter ul.footer-links li{
+    width: 100%;
+    float: left;
+    font:normal 10px/10px tahoma,arial,helvetica,sans-serif;
+    color: #dcddde;
+    text-align: center;
+    margin:0 ;
+    padding: 0 ;
+}
+.subFooter ul.footer-links li a{
+    font:normal 10px/10px tahoma,arial,helvetica,sans-serif;
+    color: #dcddde;
+    text-decoration: none;
+}
+.subFooter ul.footer-links li a:hover{
+    text-decoration: underline;
+}
+.tCenter{
+	text-align: center !important;
+}
+.radio{
+    min-height: 20px;
+    float: left;
+    line-height: 16px;
+	color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+}
+.radio .useRs{
+    float: left;
+    margin-top: -3px;
+}
+.radio input[type="radio"]{
+    float: left;
+}
+.radio span{
+    float: left;
+    margin: 0 0 0 3px;
+    line-height: 14px;
+}
+/*left bar container starts here*/
+.left-bar-container{
+    width: 200px;
+    float: left;
+	margin-bottom: 10px;
+}
+.left-bar-container .left-bar-box{
+    width: 100%;
+    float: left;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 0;
+    list-style: none;
+}
+.left-bar-container .left-bar-box li{
+    width: 100%;
+    float: left;
+}
+.left-bar-container .left-bar-box .head-text{
+    float: left;
+    font: bold 12px/13px arial,helvetica,sans-serif;
+    color: #7C51A1;
+    margin:0 0 6px 0;
+}
+.left-bar-container .left-bar-box a{
+    float: left;
+    font: normal 12px/12px arial,helvetica,sans-serif;
+    color: #50c8f4;
+    text-decoration: none;
+    margin:1px 0 2px 0;
+}
+.left-bar-container .left-bar-box a:hover{
+    text-decoration: underline;
+}
+
+
+.left-bar-container .left-bar-data{
+    width: 100%;
+    float: left;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 8px 0;
+}
+.left-bar-container .left-bar-data:last-child{
+    border: none;
+}
+.left-bar-container .left-bar-data li{
+    width: 100%;
+    float: left;
+	position: relative;
+}
+.left-bar-container .left-bar-data a.headLink{
+    float: left;
+    font: bold 13px/14px arial,helvetica,sans-serif;
+    color: #666;
+    margin:0 0 4px 0;
+}
+.left-bar-container .left-bar-data a.select{
+    float: left;
+    font: bold 13px/14px arial,helvetica,sans-serif;
+    color: #7C51A1;
+    margin:0 0 4px 0;
+}
+.left-bar-container .left-bar-data a.select:hover{
+    text-decoration: none;
+}
+.left-bar-container .left-bar-data a.headLink:hover{
+    color: #7C51A1;
+}
+.left-bar-container .left-bar-data li .dataCont{
+    float: left;
+    margin:4px 0 ;
+    width: 100%;
+}
+.left-bar-container .left-bar-data li .row{
+    float: left;
+    width: 100%;
+}
+.left-bar-container .left-bar-data a.innLink{
+    float: left;
+    font: normal 12px/13px arial,helvetica,sans-serif;
+    color: #666;
+    margin:0 0 4px 0;
+    background: none;
+}
+.left-bar-container .left-bar-data a.innLink:hover{
+    color: #7C51A1;
+    text-decoration: none;
+}
+.left-bar-container .left-bar-data a:hover{
+    text-decoration: underline;
+}
+.left-bar-container .left-bar-data li .mdAddT1{
+    width: 100%;
+    float: left;
+    font: normal 20px/22px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #666;
+    margin:0;
+}
+.left-bar-container .left-bar-data li .mdAddT2{
+    width: 100%;
+    float: left;
+    font: normal 39px/42px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #7C51A1;
+    margin:0 0 8px;
+}
+.left-bar-container .left-bar-data li .sugest{
+    float: left;
+    font: bold 12px/12px arial,helvetica,sans-serif;
+    color: #666;
+    margin:14px 0 6px 0;
+    width: 100%;
+}
+.left-bar-container .left-bar-data li input[type="text"] {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+    height: 21px;
+    margin: 2px 0 7px 0 ;
+    padding-left: 4px;
+    width: 194px;
+}
+.left-bar-container .left-bar-data li img{
+    float: left;
+	cursor: pointer;
+}
+.left-bar-container .left-bar-data li .moreDay{
+    float: left;
+    font: normal 32px/32px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color:#c7c8ca;
+    margin:15px 0 0 0;
+}
+.left-bar-container .left-bar-data li .moreDay span{
+    font: 300 54px/40px 'Roboto Condensed',sans-serif;
+    color:#ff0751;
+}
+.left-bar-container .left-bar-data li .remain{
+	width: 100%;
+	text-align: center;
+    float: left;
+    font: normal 14px/15px 'Roboto Condensed',arial,helvetica,sans-serif;
+    text-transform: uppercase;
+    color:#666;
+    margin:3px 0 11px;
+}
+.left-bar-container .left-bar-data li .remain a{
+    padding:0 !important;
+}
+.left-bar-container .left-bar-data li .pName{
+	width: 120px;
+    float: left;
+    font: bold 13px/14px arial,helvetica,sans-serif;
+    color:#7C51A1;
+    margin:30px 0 0 4px !important;
+	padding: 0 !important;
+}
+.left-bar-container .left-bar-data li .uNot{
+    float: left;
+    font: normal 16px/20px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color:#ff0751;
+    margin:10px 0 3px 0;
+}
+.left-bar-container .left-bar-data li a.subNow{
+    float: left;
+    font: normal 30px/30px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color:#7C51A1;
+    margin:0px 0 0 0 !important;
+	padding: 0 !important;
+}
+.left-bar-container .left-bar-data li .subOnly{
+    float: left;
+    font: normal 28px/28px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color:#666;
+    margin:3px 0 8px 0;
+}
+.left-bar-container .left-bar-data li .subOnly span.WebRupee{
+    top: -21px !important;
+	font-size: 20px !important;
+}
+.left-bar-container .left-bar-data li .subOnly .forAmt{
+    font: normal 51px/40px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color:#22B9F1;
+}
+/*right bar starts here*/
+.rightbar-contnr{
+    width: 250px;
+    min-height: 200px;
+	margin: 8px 0 20px;
+    float: right;
+}
+.rightbar-contnr .searchID{
+    width:100%;
+    float:left;
+    margin-bottom: 5px;
+	margin-top: -8px;
+}
+
+.rightbar-contnr .searchID input[type="text"]{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font: 12px/15px arial,helvetica,sans-serif;
+    height: 21px;
+    padding-left: 4px;
+    width:175px;
+	float: left;
+}
+.rightbar-contnr .searchID input{
+    margin: 0 !important;
+}
+
+
+.social{
+    width:37px;
+    height: 87px;
+    padding:10px 0;
+    background: #E6E7E8;
+    position: fixed;
+    top:30%;
+    right:-2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: block;
+}
+.social a{
+    width:27px;
+    height: 27px;
+    float: left;
+    margin: 0 0 3px 5px;
+    text-decoration: none;
+    opacity: .4;
+}
+.social a:hover{
+    opacity: 1;
+}
+.social .fb{
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -209px 0;
+}
+.social .twitter{
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -258px 0;
+}
+.social .gp{
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -163px 0;
+}
+.coffee{
+    position: fixed;
+    top:65%;
+    right:-2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: block;
+}
+.coffee a{
+    width:27px;
+    height: 28px;
+    float: left;
+    padding: 8px 5px;
+    text-decoration: none;
+	background:#e7e7e7 url("../images/marrydoor.png") no-repeat -523px 8px;
+	border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+	
+	-webkit-transition: none !important;
+    -moz-transition: none !important;
+    transition: none !important;
+	
+}
+.coffee a:hover{
+    background:#f2e9e5 url("../images/marrydoor.png") no-repeat -601px 8px;
+}
+/*subscribe now box*/
+.subscribe-box{
+    width: 99%;
+    min-height:474px;
+    float: left;
+    border: 1px solid #E9EAEA;
+    text-align: center;
+}
+.subscribe-box .sub-now{
+    width: 100%;
+    float: left;
+    font: normal 24px/26px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #666;
+    margin: 15px 0;
+}
+.subscribe-box .sub-now span{
+    font: normal 28px/30px 'Roboto Condensed',arial,helvetica,sans-serif;
+}
+.subscribe-box .digitCont{
+    float: left;
+    font: normal 106px/106px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #22b9f1;
+    margin-left: 8px;
+}
+.subscribe-box .digitCont .digits{
+    float: left;
+    font: normal 96px/88px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #22b9f1;
+}
+.subscribe-box .digitCont .digits .WebRupee{
+    top: -30px !important;
+}
+.subscribe-box .digitCont .digits span.rupee{
+    font: normal 50px/52px rupee;
+    color: #666;
+    position: relative;
+    top:-36px;
+}
+.subscribe-box .digitCont .forTM{
+    font: normal 24px/24px 'Roboto Condensed',arial,helvetica,sans-serif !important;
+    color: #8c8c8c;
+    float: left;
+    margin-top: 58px;
+}
+.subscribe-box .digit{
+    width: 100%;
+    float: left;
+    font: normal 106px/80px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #22b9f1;
+}
+.subscribe-box .digit span.rupee{
+    font: normal 50px/52px rupee;
+    color: #666;
+    position: relative;
+    top:-36px;
+}
+.subscribe-box .for{
+    width: 100%;
+    float: left;
+    font: normal 19px/10px 'Roboto Condensed',arial,helvetica,sans-serif;
+    color: #8c8c8c;
+	margin: 0 0 10px;
+}
+
+.subscribe-box .divider{
+    width:86%;
+    height: 1px;
+    background: #f4f4f4;
+    float: left;
+    margin: 10px 0 10px 7%;
+}
+.subscribe-box .benefit{
+    width: 100%;
+    float: left;
+    font: normal 18px/20px 'Roboto Condensed',helvetica,arial,sans-serif;
+    color: #757678;
+	margin: 8px 0 0;
+}
+.subscribe-box .benefits{
+    width: 100%;
+    float: left;
+    font: normal 18px/22px 'Roboto Condensed',helvetica,arial,sans-serif;
+    text-transform: uppercase;
+    color: #7C51A1;
+}
+.subscribe-box p{
+    width: 90%;
+    float: left;
+    font: normal 14px/26px 'Roboto Condensed',helvetica,arial,sans-serif;
+    color: #666;
+    margin: 10px 0 0 5%;
+}
+.subscribe-box input{
+    width: 120px;
+	height: 21px;
+    float: left;
+	margin: 0 2px 0 27px;
+}
+.subscribe-box .circle{
+    width: 34px;
+    height: 34px;
+    float: left;
+    font: bold 20px/30px tahoma,helvetica,arial,sans-serif;
+    color: #fff;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    background: #22b9f1;
+    margin: 20px 0 10px 108px;
+}
+.subscribe-box .subNow{
+    width: 100%;
+    float: left;
+    font: normal 24px/26px 'Roboto Condensed',helvetica,arial,sans-serif;
+    margin: 10px 0 18px 0;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #408EF8;
+}
+.rightbar-contnr .photo-spec-contnr{
+    width: 228px;
+    padding:10px 10px 20px;
+    float: left;
+    border: 1px solid #c7c9cb;
+    box-shadow:0 0 6px -2px #666666;
+    position: relative;
+}
+.rightbar-contnr .photo-spec-contnr .lArrow{
+    width: 18px;
+    height: 34px;
+    position: absolute;
+    left: -18px;
+    top:120px;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -300px 0;
+}
+.rightbar-contnr .photo-spec-contnr .head-text{
+    width: 100%;
+    float: left;
+    padding-bottom: 5px;
+    font: normal 16px/18px helvetica,arial,sans-serif;
+    color:#7C51A1;
+    text-align: center;
+    border-bottom: 1px solid #dedfe0;
+    margin-bottom: 10px;
+}
+.rightbar-contnr .photo-spec-contnr .leftC{
+    width: 114px;
+    min-height: 200px;
+    float: left;
+    border-right: 1px solid #dedfe0;
+}
+.rightbar-contnr .photo-spec-contnr .leftC .can{
+    float: left;
+    font: normal 11px/16px helvetica,arial,sans-serif;
+    color:#666;
+    padding-left: 22px;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat 0px -64px;
+    margin: 0 0 0 4px;
+}
+.rightbar-contnr .photo-spec-contnr .pCont{
+    width: 75px;
+    float: left;
+    font: normal 11px/16px helvetica,arial,sans-serif;
+    color:#666;
+    margin: 6px 0 0 15px;
+}
+.rightbar-contnr .photo-spec-contnr .pCont img{
+    width: 74px;
+    min-height: 90px;
+    float: left;
+    border: none;
+}
+.rightbar-contnr .photo-spec-contnr .pCont span{
+    float: left;
+    margin: 4px 0 0;
+}
+
+.rightbar-contnr .photo-spec-contnr .rightC{
+    width: 110px;
+    min-height: 200px;
+    float: left;
+   
+}
+.rightbar-contnr .photo-spec-contnr .rightC .cant{
+    float: left;
+    font: normal 11px/16px helvetica,arial,sans-serif;
+    color:#666;
+    padding-left: 22px;
+    margin: 0 0 0 12px;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat 0px -116px;
+}
+/*header starts here*/
+.header{
+    width: 100%;
+    min-height: 150px;
+    float: left;
+    background: #fff;
+	position: relative;
+}
+.header .logo{
+    width: 306px;
+    height: 86px;
+    float: left;
+    text-decoration: none;
+    margin: 18px 0 5px 0;
+    cursor: default;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -356px -199px;
+}
+.header .welcome-message{
+    width: 50%;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    text-align:right;
+    float: right;
+    margin: 10px 0 0 0;
+}
+.header .welcome-message span{
+    color: #876099;
+    text-transform: uppercase;
+}
+.header .search-container{
+    width: 417px;
+    height: 40px;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    float: right;
+    margin: 24px 0 0 0;
+    text-align: right;
+}
+.header .search-container input[type="text"]{
+    width: 165px;
+    height: 21px;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    margin: 0 5px 0 0;
+    padding-left: 4px;
+    background: #fff;
+    border: 1px solid #E7E8E9;
+}
+.header .search-container .type2b{
+    margin: 0 !important;
+}
+.header .user-login{
+    width:439px;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    float: right;
+    margin:6px 0 0 0;
+    text-align: left;
+    position: relative;
+}
+.header .user-login .login-contnr{
+    width:181px;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    float: left;
+    margin:0 0 0 4px;
+}
+.header .user-login .login-contnr input{
+    border: 1px solid #E7E8E9;
+    font: normal 12px/14px arial,helvetica,sans-serif;
+    height: 21px;
+    width:175px;
+    padding-left: 4px;
+}
+.header .user-login .login-contnr p{
+    width: 100%;
+    float: left;
+    text-align: left;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    margin-bottom:3px;
+}
+.header .user-login .login-contnr a{
+    float: left;
+    text-align: left;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #408ef8;
+    margin-top: 5px;
+}
+.header .user-login .login-contnr a:hover{
+    text-decoration: underline;
+}
+
+
+.header ul.nav-bar{
+    width: 100%;
+    height: 26px;
+    background: #f5f5f5;
+    list-style: none;
+    float: left;
+    margin:0;
+    text-align:  center;
+}
+.header ul.nav-bar li.menu{
+    height: 17px;
+    border-right: 1px solid #c6c7c9;
+    list-style: none;
+    margin:4px 0 0;
+    display: inline-block;
+    position: relative;
+}
+.header ul.nav-bar li.menu:last-child{
+    border: 0 none;
+}
+.header ul.nav-bar li.menu a{
+    height: 17px;
+    background:transparent url("http://marrydoor.com/images/marrydoor.png") no-repeat right 5px;
+    font: bold 12px/17px arial,helvetica,sans-serif;
+    text-transform: uppercase;
+    color: #666;
+    padding-right:10px;
+    margin:1px 4px 0 4px;
+    text-decoration: none;
+    float: left;
+	-webkit-transition: none !important;
+    -moz-transition: none !important;
+    transition: none !important;
+}
+.header ul.nav-bar li.menu a:hover, .header ul.nav-bar li.menu .select{
+    color:#876099 !important;
+    background-position: right -12px !important;
+}
+.header ul.nav-bar li.menu .sub{
+    padding:10px 5px 10px 10px;
+    position: absolute;
+    right:-15px;
+    top:26px;
+    border: 1px solid #c7c9cb;
+    background: #fff;
+    box-shadow: 0 0 6px -2px #666;
+    text-align: left;
+    z-index: 777;
+}
+.header ul.nav-bar li.menu .sub .arrow{
+    width:22px;
+    height: 14px;
+    position: absolute;
+    right: 10px;
+    top:-14px;
+    background:transparent url("http://marrydoor.com/images/marrydoor.png") no-repeat -735px 0px;
+}
+.header ul.nav-bar li.menu .sub .data{
+    float: left;
+    background: #fff;
+}
+.header ul.nav-bar li.menu .sub .data .dividr{
+    width: 96%;
+    height: 1px;
+    float: left;
+    background: #e3e4e5;
+    margin: 5px 0 7px;
+}
+.header ul.nav-bar li.menu .sub span{
+    width: 100%;
+    color: #876099;
+    font: bold 12px/14px arial;
+    float: left;
+    margin: 0 0 5px 0;
+}
+.header ul.nav-bar li.menu .sub p{
+    width: 100%;
+    color: #666;
+    font: normal 12px/16px arial;
+    float: left;
+    margin:0 0 5px 0;
+}
+.header ul.nav-bar li.menu .sub a{
+    color: #00aeef;
+    font: normal 12px/14px arial;
+    float: left;
+    margin:2px 0;
+    background: none;
+    text-transform: none;
+}
+.header ul.nav-bar li.menu .sub a:hover{
+    text-decoration: underline;
+}
+.header ul.nav-bar li.menu .sub .mailto{
+    width: 100%;
+    color: #666 !important;
+    margin: 0 !important;
+}
+.header ul.nav-bar li.menu .sub .saved{
+    width: 85%;
+    color:#7C51A1 !important;
+    margin:0 15% 0 0 !important;
+    text-align: right;
+}
+.header ul.nav-bar li.menu .sub .searchby{
+    width: 85%;
+    color: #666;
+    font: normal 11px/12px arial;
+    float: left;
+    margin:5px 15% 5px 0;
+    text-align: right;
+}
+.header ul.nav-bar li.menu .sub .options{
+    float: right;
+    margin:0 15% 5px 0;
+}
+.header ul.nav-bar li.menu .sub .options a{
+    height: 10px;
+    color: #00aeef;
+    font: normal 11px/11px arial;
+    float: left;
+    padding: 0 5px;
+    border-right: 1px solid #00aeef;
+}
+.header ul.nav-bar li.menu .sub .options a:last-child{
+    border: 0;
+    padding-right: 0;
+}
+.header .breadcrumb{
+    width: 100%;
+    height: 20px;
+    margin: 10px 0 0;
+    float: left;
+}
+.header .breadcrumb a{
+    height: 20px;
+    font: normal 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    float: left;
+    text-decoration: none;
+}
+.header .breadcrumb a:hover{
+    color: #7C51A1;
+    text-decoration: underline;
+}
+.header .breadcrumb span{
+    height: 20px;
+    font: bold 12px/15px arial,helvetica,sans-serif;
+    color: #666;
+    float: left;
+    text-decoration: none;
+    margin-left: 5px;
+}
+/*footer section starts here*/
+.footer{
+    width: 100%;
+    float: left;
+    height: 40px;
+    background: #7c51a1;
+}
+.footer ul.footer-links{
+    width:850px;
+    list-style: none;
+    margin-top:15px !important;
+    margin: 0 auto;
+}
+.footer ul.footer-links li{
+    float: left;
+    height: 12px;
+    border-right: 1px solid #bdb2c4;
+    font:normal 12px/10px tahoma,arial,helvetica,sans-serif;
+    color: #dcddde;
+    margin:0 0 0 4px;
+    padding: 0 4px 0 0;
+}
+.footer ul.footer-links li:last-child, .footer ul.footer-links li:first-child{
+    border: none;
+}
+.footer ul.footer-links li a{
+    float: left;
+    height: 12px;
+    font:normal 12px/10px tahoma,arial,helvetica,sans-serif;
+    color: #dcddde;
+    text-decoration: none;
+}
+.footer ul.footer-links li a.lol{
+    float: none !important;
+}
+.footer ul.footer-links li a:hover{
+    text-decoration: underline;
+}
+.footer ul.footer-links li a.loloos{
+    float: left;
+    width: 46px;
+    height: 32px;
+    font:normal 11px/11px tahoma,arial,helvetica,sans-serif;
+    color: #dcddde;
+    text-decoration: none;
+    margin-top: -10px;
+    background: transparent url("http://marrydoor.com/images/marrydoor.png") no-repeat -96px 0;
+}
+
+/*notification tab section*/
+
+.noti_contnr{
+	width: 362px;
+	height: 32px;
+	position: absolute;
+	top: 49px;
+	left: 300px;
+	z-index: 7;
+}
+.noti_contnr .notifications{
+	/*width: 164px;*/
+	height: 32px;
+	float: left;
+	margin-left: 98px;
+	position: relative;
+	background: #fff;
+	border: 1px solid #c7c9cb;
+	z-index: 777;
+}
+.noti_contnr .notifications a{
+	width: 32px;
+	height: 32px;
+	float: left;
+	border-right: 1px solid #c7c9cb;
+	position: relative;
+	background: #fff;
+}
+.noti_contnr .notifications .count{
+	width: 29px;
+	height: 26px;
+	float: left;
+	position: absolute;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -638px -65px;
+	left: 2px;
+	top: -21px;
+	font:bold 12px/15px tahoma,arial,helvetica,sans-serif;
+    color: #fff;
+	text-align: center;
+	display: none;
+}
+.noti_contnr .notifications a:nth-child(3) .count{
+	display: block;
+}
+.noti_contnr .notifications a:last-child{
+	border: none;
+}
+.noti_contnr .notifications a:first-child{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -463px -65px;
+}
+.noti_contnr .notifications a:first-child.select{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -463px -99px;
+	background-color: #7C51A1;
+}
+.noti_contnr .notifications a:nth-child(2){
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -496px -65px;
+}
+.noti_contnr .notifications a:nth-child(2).select{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -496px -99px;
+	background-color: #7C51A1;
+}
+.noti_contnr .notifications a:nth-child(3){
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -529px -65px;
+}
+.noti_contnr .notifications a:nth-child(3).select{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -529px -99px;
+	background-color: #7C51A1;
+}
+.noti_contnr .notifications a:nth-child(4){
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -562px -65px;
+}
+.noti_contnr .notifications a:nth-child(4).select{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -562px -99px;
+	background-color: #7C51A1;
+}
+.noti_contnr .notifications a:nth-child(5){
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -595px -65px;
+}
+.noti_contnr .notifications a:nth-child(5).select{
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -595px -99px;
+	background-color: #7C51A1;
+}
+
+.notiTabData {
+    float: left;
+	position: relative;
+    margin:-1px 0 0;
+    width:340px;
+	background: #fff;
+	z-index: 0;
+	padding:0 10px 10px;
+	border: 1px solid #C7C9CB;
+	box-shadow: 0 4px 6px -3px #000000;
+	display:none;
+}
+.notiTabData li:last-child{
+	border-bottom: 0;
+    padding-bottom: 0;
+	cursor: default;
+}
+.notiTabData li{
+    float: left;
+    position: relative;
+    width:100%;
+    padding: 0 0 8px;
+	margin: 4px 0 0;
+    border-bottom: 1px solid #e9e9e9;
+}
+.notiTabData li.unread{
+    background: #f8f8f8;
+}
+.notiTabData li input[type="checkbox"]{
+    float: left;
+    margin: 5px 4px 0 4px;
+}
+.notiTabData li img{
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin: 5px 4px 0 0;
+}
+.notiTabData li div, .notiTabData li p{
+	cursor: default;
+}
+.notiTabData li .user_name{
+    float: left;
+    margin: 4px 0 0 4px;
+    color: #7c51a1;
+    font:normal 12px/12px arial,helvetica,sans-serif;
+}
+.notiTabData li .user_message{
+    width: 82%;
+    float: left;
+    margin: 2px 0 0 4px;
+    color: #666;
+    font:normal 12px/14px arial,helvetica,sans-serif;
+	cursor: default;
+}
+.notiTabData li .sent_message{
+    width: 80%;
+    float: left;
+    margin: 2px 0 0 4px;
+    padding-left: 12px;
+    color: #666;
+    font:normal 13px/14px arial,helvetica,sans-serif;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -1023px -264px;
+}
+.notiTabData li .recvd_message{
+    width: 80%;
+    float: left;
+    margin: 2px 0 0 4px;
+    padding-left: 12px;
+    color: #666;
+    font:normal 13px/14px arial,helvetica,sans-serif;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -1023px -288px;
+}
+.notiTabData li .accept{
+    bottom: 0 !important;
+    right: 61px !important;
+}
+.notiTabData li .decline{
+    bottom: 0 !important;
+    right: 0 !important;
+}
+.notiTabData li:hover .msge_data{
+    display: block;
+}
+.notiTabData li .msge_data{
+    position: absolute;
+    height: 20px;
+    top: 2px;
+    right: 0px;
+    width: 120px;
+    display: none;
+}
+.notiTabData li .msge_data .date{
+    float: right;
+    color: #aaaaaa;
+    font:normal 11px/12px arial,helvetica,sans-serif;
+    margin: 0 10px 0 0;
+}
+.notiTabData li .msge_data .close{
+    height: 11px;
+    width: 11px;
+    float: right;
+    margin-right: 4px;
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat -306px -78px;
+}
+.notiTabData li .msge_data .close:hover{
+    background-position:-306px -64px;
+}
+.notiTabData li .message_reply{
+    width: 100%;
+    float: left;
+    margin: 19px 0 0 0;
+    position: relative;
+}
+.notiTabData li .message_reply textarea{
+    width: 406px;
+    float: left;
+    border: 1px solid #E7E8E9;
+    color: #666;
+    font:normal 12px/14px arial,helvetica,sans-serif;
+    padding: 5px;
+}
+.notiTabData li .message_reply a{
+    width: 42px;
+    right: 0;
+    bottom: 0;
+}
+.notiTabData li .notiFoot{
+	width: 100%;
+    float: left;
+    color: #aaaaaa;
+    font:normal 10px/12px arial,helvetica,sans-serif;
+	text-align: center;
+    margin:5px 0 0 0;
+}
+.notiTabData li .noti_head{
+    float: left;
+    width:100%;
+	margin: 4px 0 0;
+	color: #876099;
+	font: normal 16px/18px arial,helvetica,sans-serif;
+}
+.notiTabData li .noti_message{
+    float: left;
+    width:100%;
+	margin:8px 0 4px 0 ;
+	color: #666;
+	font: normal 14px/18px arial,helvetica,sans-serif;
+	text-align: justify;
+}
+.notiTabData li .noti_message span{
+	color: #408EF8;
+	font: normal 18px/18px arial,helvetica,sans-serif;
+}
+.notiTabData li .noti_sn{
+	width: 100%;
+    float: left;
+	margin:4px 0 0 ;
+	text-align: center;
+}
+.notiTabData li .noti_sn a{
+	color: #408EF8;
+	font: normal 24px/25px arial,helvetica,sans-serif;
+}
+.interstTab .optns{
+    width: 100%;
+    float: left;
+    background: #fff;
+    height: 16px;
+    position: relative;
+    z-index: 7;
+}
+.interstTab .option_cont {
+    float: right;
+    margin:0;
+    font:normal 11px/12px arial,helvetica,sans-serif;
+    color: #666;
+}
+.interstTab .option_cont a{
+    font:normal 11px/12px arial,helvetica,sans-serif;
+}
+.notiTabData li .int_head{
+    width: 82%;
+    float: left;
+    margin:4px 0 0 4px;
+    color: #666;
+    font:normal 12px/12px arial,helvetica,sans-serif;
+}
+.notiTabData li .int_head span{
+    font:normal 11px/12px arial,helvetica,sans-serif;
+}
+.notiTabData li .int_head a{
+    color: #7c51a1;
+}
+.notiTabData li .pDetails{
+    width: 82%;
+    float: left;
+    margin:2px 0 0 4px;
+    color: #666;
+    font:normal 11px/11px arial,helvetica,sans-serif;
+}
+.notiTabData li .pDetails a{
+    color: #7c51a1;
+    font:bold 11px/11px arial,helvetica,sans-serif;
+}
+.notiTabData li .pAction{
+    width: 82%;
+    float: left;
+    margin:2px 0 0 4px;
+    color: #7c51a1;
+    font:bold 11px/11px arial,helvetica,sans-serif;
+}
+.notiTabData li .vistrNot{
+    float: left;
+    position: relative;
+	margin:2px 0px 2px 4px;
+    border: 1px solid #e9e9e9;
+    cursor: pointer;
+}
+.notiTabData li .vistrNot img{
+	width: 50px;
+	height: 50px;
+	margin: 0;
+	padding: 0;
+    float: left;
+}
+.notiTabData li.cDefalt{
+	padding: 0 0 4px !important;
+}
+.subContent {
+	width: 782px;
+    border: 1px solid #F8F8F8;
+    float: left;
+    background: #fff;
+    margin: 5px 0 0;
+    padding: 13px;
+    box-shadow:0px 0px 5px #888888;
+    position: relative;
+}
+.infoB{
+	font:bold 11px/15px tahoma,arial,helvetica,sans-serif;
+    color: #7C51A1;
+	background: #F1EFFA;
+	padding: 0px 5px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-left: 4px;
+	cursor: help;
+}
+.infoB:hover{
+    color: #F1EFFA;
+	background: #7C51A1;
+	text-decoration: none !important;
+}
+.infoBox{
+	width: 200px;
+	min-height:80px;
+	padding:15px 16px;
+	position: absolute;
+	left: 150px;
+	bottom: -18px;
+	background: #fff;
+	border: 1px solid #C7C9CB;
+    box-shadow:0 0 6px -2px #666666;
+	z-index: 7;
+	display: none;
+}
+.infoBox .iArrow {
+    background: url("http://marrydoor.com/images/marrydoor.png") no-repeat scroll -300px 0 transparent;
+    height: 34px;
+    left: -18px;
+    position: absolute;
+    bottom: 10px;
+    width: 18px;
+}
+.infoBox .iHead{
+	width: 100%;
+    color: #7C51A1;
+    float: left;
+    font:normal 16px/16px arial,helvetica,sans-serif;
+	margin: 0 0 7px;
+	padding-bottom: 3px;
+	border-bottom: 1px solid #7C51A1;
+}
+.infoBox p{
+	text-align: left;
+	font:normal 13px/18px arial,helvetica,sans-serif;
+}
+.unlock{
+	width: 127px;
+	height: 120px;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat scroll -738px -150px transparent;
+	float: left;
+	margin: 10px 0 20px 41.8%;
+}
+.docRqst{
+	width: 127px;
+	height: 120px;
+	background: url("http://marrydoor.com/images/marrydoor.png") no-repeat scroll -738px -277px transparent;
+	float: left;
+	margin: 10px 0 20px 41.5%;
+}
+.standalone{
+	width: 372px !important;
+}
+.coffee{
+    position: fixed;
+    top:65%;
+    right:-2px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: block;
+}
+.coffee a{
+    width:27px;
+    height: 28px;
+    float: left;
+    padding: 8px 5px;
+    text-decoration: none;
+	background:#e7e7e7 url("http://marrydoor.com/images/marrydoor.png") no-repeat -523px 8px;
+	border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.coffee a:hover{
+    background:#f2e9e5 url("http://marrydoor.com/images/marrydoor.png") no-repeat -601px 8px;
+}
+	
+/*save search box*/
+
+
+.saveSbox{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C7C9CB;
+    box-shadow: 0 0 6px -2px #666666;
+    left: -85px;
+    padding: 10px;
+    position: absolute;
+    text-align: left;
+    top: -123px;
+    width: 220px;
+    z-index: 777;
+}
+.saveSbox .tarrow{
+    background: url("../images/marrydoor.png") no-repeat scroll -790px -1px transparent;
+    bottom: -13px;
+    height: 14px;
+    left: 44%;
+    position: absolute;
+    width: 22px;
+}
+.saveSbox .cont{
+    float: left;
+    background: #fff;
+}
+.saveSbox .cont .head{
+    float: left;
+    width: 100%;
+    background: #fff;
+    border-bottom: 1px solid #E9EAEA;
+    margin-top: 4px;
+}
+.saveSbox .cont .head span{
+    float: left;
+    font: normal 12px/13px arial,helvetica,sans-serif;
+    color: #666;
+    margin-bottom: 3px;
+}
+.saveSbox .cont .head a{
+    float: right;
+    font: normal 12px/13px arial,helvetica,sans-serif;
+    color: red;
+    text-decoration: none;
+}
+.saveSbox .cont .row{
+    float: left;
+    width: 100%;
+	margin-bottom: 5px;
+}
+.saveSbox .cont .row input{
+    float: left;
+    width: 96%;
+    font: normal 12px/13px arial,helvetica,sans-serif;
+    color: #999;
+    margin:12px 0 6px 0;
+}
+
+/*login error message class starts*/
+.logError{
+	width: 240px;
+    padding:10px;
+    position: absolute;
+    left: 62px;
+    top:51px;
+    border: 1px solid #c7c9cb;
+    background: #fff;
+    box-shadow: 0 0 6px -2px #666;
+    text-align: center;
+    z-index: 777;
+	color: #FF0751;
+}
+.logError .tarrow{
+    width:22px;
+    height: 14px;
+    position: absolute;
+    left: 44%;
+    top:-14px;
+    background:transparent url("../images/marrydoor.png") no-repeat -735px 0px;
+}
+.logError .cont{
+	width: 100%;
+    float: left;
+    background: #fff;
+}
+/*login error message class ends*/
+
+
+.editContnr{
+	border:1px solid #E3E3E4;
+	float: left;
+	padding: 10px;
+	box-shadow: 0 1px 3px #eee;
+}
+
+.message-contnr{
+	width: 600px;
+	float: left;
+}
+.message-contnr ul{
+	width: 100%;
+	float: left;
+}
+.message-contnr ul li{
+	width: 100%;
+	float: left;
+}
+.message-contnr ul li:first-child{
+	border-bottom: 1px solid #E3E3E4;
+	padding-bottom: 10px;
+	border-bottom: 10px;
+}
+.message-contnr ul li textarea{
+	width: 588px;
+	float: left;
+}
+.message-contnr ul li .buttonContnr{
+	width: 100%;
+	float: left;
+	margin: 0 0 10px;
+}
+.message-contnr ul li .buttonContnr a{
+	margin: 10px 0 0 10px !important;
+}
+
+.highlightBox{
+	float: left;
+	width: 95%;
+	min-height:147px;
+	background: #fcfcfd;
+	border: 1px solid #E9EAEA;
+	padding: 10px;
+	margin: 10px 0;
+}
+.highlightBox p{
+	font:normal 18px/24px arial,helvetica,sans-serif;
+}
+.mL40{
+	margin-left: 40px !important;
+}
+.mH200{
+	min-height: 200px !important;
+}
+.pComplete{
+	width: 722px !important;
+	margin-top: 0 !important;
+	min-height: 100px !important;
+}
+
+
+div.loading {
+    background-color: #eee;
+    background-image: url('http://marrydoor.com/images/loading.gif');
+    background-position:  center center;
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+div.loading * {
+    opacity: .8;
+}
+
+div.ajax-progress {
+  position: fixed;
+  display: none;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  background-image: url('http://marrydoor.com/images/ajax-loader.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  border: 1px solid green;
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}	
+
