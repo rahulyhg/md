@@ -134,12 +134,6 @@ class UserController extends Controller
 		
 	}
 	
-	public function actionTest()
-	{
-		$user = Yii::app()->session->get('user');
-		$userPersonal = $user->userpersonaldetails;
-		$this->render('horoscope');
-	}
 	
 	public function actionContact()
 	{

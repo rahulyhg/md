@@ -29,7 +29,7 @@ class Dropdownmenu extends CWidget
     {
         $user  = Yii::app()->session->get('user');
 		
-        $user = Users::model()->with('shortlist')->findbyPk($user->userId);
+        $nUser = Users::model()->with('shortlist')->findbyPk($user->userId);
 		$shortList = 0;
 		$notifiyShort = array();
 		/*

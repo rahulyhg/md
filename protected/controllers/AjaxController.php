@@ -246,10 +246,12 @@ class AjaxController extends Controller
 	
 	public function actionNotify()
 	{
-		$user = Yii::app()->session->get('user');
+		if(isset($_POST['userId']) && !empty($_POST['userId'])) {
+			$userIds = implode(",", $_POST['userId']);
 		// remove the unwanted records from table
-		$query = "update notifications set status = 1 where userId = ({$user->userId})";
+		$query = "update notifications set status = 1 where userId in ({$userIds})";
 		Utilities::executeRawQuery($query);
+		}
 	}
 	
 	public function actionUpdateInvitation()

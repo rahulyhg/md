@@ -44,9 +44,13 @@ return array(
         	'class' => 'application.extensions.yii-mail.YiiMail',  
 	          'transportType'=>'smtp', /// case sensitive!
 	          'transportOptions'=>array(
-	            'host'=> 'smtp.gmail.com',
+	            'host'=> 'hs13.name.com',
+					'username'=>'info@marrydoor.com',
+                        'password'=>'Aditi01*',
+                        'port'=>'465', 
+						'encryption'=>'ssl',
 	            ),
-	        'logging' => true,
+	        'logging' => false,
 	        'dryRun' => false
     	),
 		
@@ -110,7 +114,7 @@ return array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail'=>'info@marrydoor.com',
 		'resourceUrl' => 'http://lmarrydoor.com',
 		'homeUrl' => 'http://local.marrydoor.com',
 		'mediaUrl' => 'http://lmarrydoor.com/images',

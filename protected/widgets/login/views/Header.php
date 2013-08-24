@@ -4,7 +4,7 @@
                 <?php $user = Yii::app()->session->get('user');?>
  <?php if(isset($userName)) {?>
  			<!-- notification drop down -->
- 			<?php //$this->widget('application.widgets.menu.Dropdownmenu'); ?> 
+ 			<?php $this->widget('application.widgets.menu.Dropdownmenu'); ?> 
  			<!-- drop down end -->
   			<div class="welcome-message">
   			<span class="color">

@@ -9,7 +9,7 @@ $heightArray = Utilities::getHeights();
 				<div class="count" style="display: block"  id="tab1_count"><?php echo count($dInterests);?></div>
 			<?php }?>
 				</a>
-				<a href="#" id="tab2" class="noti">
+				<a href="#" id="tab2_hide" class="noti">
 				<?php if(isset($notifications ) && sizeof($notifications ) > 0 ) {?>
 					<div class="count" style="display:block"  id="tab2_count" > <?php echo count($notifications)?></div>
 				<?php }  ?>
@@ -134,6 +134,9 @@ $heightArray = Utilities::getHeights();
 					
 				
 				<li>
+					<a target="_blank" href="#"><img width="75" height="75" src="<?php echo Utilities::getProfileImageForId($value->userId) ?>" alt="" /></a>
+					<input name="userId" type="hidden" value="<?php echo $value->notificationId?>" />
+					<a target="_blank" class="user_name" href="<?php echo '/search/byid/id/'.$value->marryId ?>"><?php echo $value->name?></a>
 					<div class="user_message"><?php echo $value->notification?>. (<?php echo $value->createdate?>)</div>
 				</li>
 				

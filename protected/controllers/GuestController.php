@@ -17,6 +17,11 @@ class GuestController extends Controller
 			if(isset($user))
 			{
 				$emailSent = true;
+				$paswd = $this->generateRandomString();
+				$user->password = new CDbExpression("MD5('{$paswd}')");
+				$user->save();
+				$body = "Your password has been reset successfully.Your new password is ".$paswd;
+				Utilities::sendClaimEmail($user->emailId,'Password Reset',$body);
 				$this->render('forgot',array('sent'=>$emailSent));
 			}
 			else
@@ -115,6 +120,15 @@ class GuestController extends Controller
 		$model = new UserForm();
 		//$this->layout= '//layouts/single';
 		$this->render('newuser',array('model'=>$model,'searchModel' =>$searchModel));
+	}
+	
+	function generateRandomString($length = 10) {
+	    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+	        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+	    }
+	    return $randomString;
 	}
 	
 	public function actionPaiduser()
