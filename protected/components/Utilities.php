@@ -495,20 +495,17 @@ class Utilities
  	return Yii::app()->params['homeUrl']; 
  }
  
-	public static function sendClaimEmail($claimParams) {
-		$subject = "test";
+	public static function sendClaimEmail($to,$subject,$body) {
         // escaped just in case...
         $datetime = new DateTime(); 
         $dString = $datetime->format('Y/m/d H:i:s');
-        $body = htmlentities("UserName: {$claimParams['customerId']}\nEmail Address: {$claimParams['emailId']}\nPromotion Code: {$claimParams['claimcode']}\nDate:{$dString}",
-                                ENT_QUOTES, 'UTF-8');
         set_time_limit(0);
         Yii::import('application.extensions.*');
         $message = new YiiMailMessage();
-       	$message->setTo(array(Yii::app()->params['MailTo']=>'Promotions'));
-        $message->setFrom(Yii::app()->params['MailFrom']);
+       	$message->setTo($to);
+        $message->setFrom(Yii::app()->params['adminEmail']);
         $message->setSubject($subject);
-        $message->setBody($body);
+        $message->setBody($body, 'text/html');
         $numsent = Yii::app()->mail->send($message);
 	}
  

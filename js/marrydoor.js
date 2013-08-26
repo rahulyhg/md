@@ -116,19 +116,6 @@ $(function(){
         $(this).addClass('select');
         var tabid = $(this).attr('id');
         
-        if(tabid == 'tab2')
-        {        	
-        	 $.ajax({
-                type: "POST",
-                url: "/Ajax/notify",
-                dataType: "json",
-                success: function(data) {
-                	$('#tab2_count').hide();
-                }
-            });
-            
-        }
-        
         $('.notiTabData').each(function(){
            $(this).hide();
         })

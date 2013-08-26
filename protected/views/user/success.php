@@ -18,7 +18,7 @@
 
 <section class="data-contnr ">
 		<div class="congrats">Congratulations!</div>
-		<p>You have successfully registered with marrydoo.com with the <span>ID: <?php echo $user->marryId?></span></p>
+		<p>You have successfully registered with marrydoor.com with the <span>ID: <?php echo $user->marryId?></span></p>
 		<p>Please use this ID for any future transactions and a mail is send to your registered e-mail id which contains your registration details.</p>
 		<a href="/user/showpartner" class="next">NEXT</a>
 	</section>

@@ -279,7 +279,7 @@ class AjaxController extends Controller
 					$query = "update interests set viewStatus = 1 where receiverId = {$user->userId} and viewStatus = 0";
 					break;
 				case 'tab2':
-					$query = "";
+					$query = "update notifications set status = 1 where userId = {$user->userId} and status = 0";
 					break;
 				case 'tab3':
 					$query = "update profileviews set status = 1 where visitedId = {$user->userId} and status = 0";
@@ -292,6 +292,8 @@ class AjaxController extends Controller
 					break;
 			}
 		}
+		if($user->userType == '0')
+		$query = "";
 		if($query != ""){
 			Utilities::executeRawQuery($query);
 			echo true;

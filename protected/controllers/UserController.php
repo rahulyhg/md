@@ -721,6 +721,9 @@ class UserController extends Controller
 		$partner->partnerDescription = $_POST['partnerDesc'];
 		
 		$partner->save();
+		$subject = "Congratulations!";
+		$body = "You have successfully registered with marrydoor.com with the {$user->marryId} . Please visit the site http://marrydoor.com";
+		Utilities::sendClaimEmail($user->emailId,$subject,$body);
 		$this->render('success',array('user'=>$user));
 		
 	}

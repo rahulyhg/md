@@ -9,7 +9,7 @@ $heightArray = Utilities::getHeights();
 				<div class="count" style="display: block"  id="tab1_count"><?php echo count($dInterests);?></div>
 			<?php }?>
 				</a>
-				<a href="#" id="tab2_hide" class="noti">
+				<a href="#" id="tab2" class="noti">
 				<?php if(isset($notifications ) && sizeof($notifications ) > 0 ) {?>
 					<div class="count" style="display:block"  id="tab2_count" > <?php echo count($notifications)?></div>
 				<?php }  ?>
