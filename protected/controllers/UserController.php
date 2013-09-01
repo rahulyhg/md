@@ -111,6 +111,7 @@ class UserController extends Controller
 				$form->username = $user->marryId;
 				$form->password = $password;
 				
+				$this->sendEmail($user->emailId,$password,$user->marryId);
 				if($form->login())
 				{
 					Yii::app()->session->add('user',$user);
@@ -1102,4 +1103,147 @@ class UserController extends Controller
 		$this->render('familyphotoupload',array('photos'=>$photosList,'user'=>$user,'settings'=>$settings));
 	}
 	
+	
+	public function sendEmail($email,$password,$marryId)
+	{
+
+		$body = '
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <title>marrydoor.com</title>
+</head>
+<body style="margin: 0;padding: 0;font-family: sans-serif;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="background-color:#ffffff;font-family:Arial,Helvetica,sans-serif">
+    <tbody>
+        <tr>
+            <td>
+                <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="left" style="background:#c8bfe7;padding-top: 5px;padding-bottom: 5px;">
+                    <tbody>
+                        <tr>
+                            <td width="100%" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7">
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#7c51a1" style="background-color:#7c51a1;margin-bottom: 5px;">
+                                    <tbody>
+                                        <tr>
+                                            <td height="80" valign="middle"><span style="color: #ffffff;font-size: 50px;margin-left: 20px;float: left;">marrydoor</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#c8bfe7" style="background-color:#c8bfe7;margin-top: 5px;margin-bottom: 5px;">
+                                    <tbody>
+                                        <tr>
+                                            <td height="35" valign="middle"><span style="color: #ffffff;font-size: 24px;margin-left: 20px;float: left;">Welcometo Marrydoor.com</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#ffffff" style="background-color:#ffffff;padding-bottom: 30px;padding-top: 30px;"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 20px arial;text-align:justify;color:#009900;float: left;margin-left: 20px;margin-right: 20px;margin-bottom: 5px;">
+                                                    You have successfully registered for partner search.
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;margin-right: 20px;margin-top: 0px;margin-bottom: 20px;">
+                                                    We will update you about your matches, requests &amp; messages from them.
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 5px;">
+                                                    Your login details are:
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 5px;">
+                                                    Profile ID : <b>'.$marryId.'</b>
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 5px;">
+                                                    Email ID: <b>'.$email.'</b>
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 30px;">
+                                                    Password: <b>'.$password.'</b>
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#333333;float: left;margin-left: 20px;">
+                                                    Best wishes
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;">
+                                                    Biju George
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 14px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;">
+                                                    Cheaf Executive Officer
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 14px arial;text-align:justify;color:#666666;float: left;margin-left: 20px;">
+                                                    Marrydoor.com
+                                                </font>
+                                            </td>
+                                        </tr> 
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#c8bfe7" style="background-color:#c8bfe7;"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" >
+                                                <font style="font:normal 14px arial;text-align:justify;color:#ffffff;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 10px;float: left;">
+                                                    Wishing You all the very best in Your partner search, <br /> Team - MARRYDOOR
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" align="center" bgcolor="#ffffff" style="background-color:#ffffff;"> 
+                                    <tbody>
+                                        <tr>
+                                            <td height="50" valign="top" bgcolor="#ffffff" >
+                                                <font style="font:normal 12px arial;text-align:justify;color:#939598;float: left;margin-left: 20px;margin-right: 20px;margin-top: 10px;margin-bottom: 10px;">
+                                                    You are a MarryDoor.com member. This e-mail comes to you in accordance with MarryDoor.com Privacy Policy. <a style="color:#408EF8;text-decoration: none;" href="https://www.marrydoor.com/">Click here</a>  to unsubscribe. MarryDoor.com is not responsible for content other than its own and makes no warranties or guaratees about the products or services that are advetised.
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>';
+		Utilities::sendClaimEmail($email,'Welcome to Marrydoor.com',$body);
+		
+	}	
 }
