@@ -160,7 +160,7 @@
             <li>
 				<div class="mdAddT1 mT12">Want to invite a friend to </div>
 				<div class="mdAddT2">marrydoor ?</div>
-				<h5>Key in e-mail ids separated by comma</h5>
+				<h5>Please enter email</h5>
 				<input type="text" name="emails" id="emails" placeholder="Friends Email ID" />
 				<div id="inviitation"> <a href="#" class="type2 no-marg">Invite</a></div>
 			</li>
@@ -172,6 +172,12 @@
    
 	$("#inviitation").click(function(){
 		if($("#emails").val()) {
+
+			var regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(@[a-zA-Z0-9-]{3,})+(\.[a-zA-Z0-9-]{2,})/; 
+			if(!regex.test($("#emails").val())){
+			  alert("You must enter a valid e-mail address");
+			  return false;
+			}
 
 			 $.ajax({
 		            type: "POST",

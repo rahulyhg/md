@@ -11,6 +11,7 @@ class SearchController extends Controller
 	public function actionIndex()
 	{
 		$user = Yii::app()->session->get('user');
+		$user = Users::model()->findbyPk($user->userId);
 		if(!isset($user))
 		{
 			$this->render('index',array('tab'=>'tab1'));
@@ -315,14 +316,7 @@ class SearchController extends Controller
 			
 			
 			if(isset($user)){
-				$scondition = "FIND_IN_SET('{$user->userId}',profileIDs)";
-				$profileBlock = ProfileBlock::model()->findAll(array('condition'=>$scondition));
-
-				$blockId = array();
-				foreach ($profileBlock as $key => $value) {
-					$blockId[] = $value->userId;
-				}
-				$blockIdList = implode(",", $blockId);
+				$blockIdList = $this->getBlockedIds($user);
 			}
 			
 			if(!empty($_POST['heightStart'])&& !empty($_POST['heightLimit']))
@@ -414,7 +408,7 @@ class SearchController extends Controller
 
 				$userList = implode(",", $userIds);
 				$scondition = " userId in ({$userList}) ";
-				if(isset($blockIdList) && sizeof($blockId) > 0 )
+				if(isset($blockIdList) && !empty($blockIdList))
 				$scondition .= " AND userId NOT IN({$blockIdList})";
 				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC'),'active=1');
 
@@ -591,7 +585,7 @@ class SearchController extends Controller
 				{
 					$searchText.= "Do not show ignored profiles ,";
 					if($user->profileBlock){
-						$blockedIds	= $user->profileBlock->profileIDs;
+						$blockedIds	= $this->getBlockedIds($user);
 					}
 				}
 
@@ -680,13 +674,7 @@ class SearchController extends Controller
 		$user = Yii::app()->session->get('user');
 
 		if(isset($user)){
-			$scondition = "FIND_IN_SET('{$user->userId}',profileIDs)";
-			$profileBlock = ProfileBlock::model()->findAll(array('condition'=>$scondition));
-			$blockId = array();
-			foreach ($profileBlock as $key => $value) {
-				$blockId[] = $value->userId;
-			}
-			$blockIdList = implode(",", $blockId);
+			$blockIdList = $this->getBlockedIds($user);
 
 		}
 		if(isset($_POST) && !empty($_POST))
@@ -734,7 +722,7 @@ class SearchController extends Controller
 			{
 				$userList = implode(",", $userIds);
 				$scondition = " userId in ({$userList}) ";
-				if(isset($blockIdList) && sizeof($blockId) > 0 )
+				if(isset($blockIdList) && !empty($blockIdList))
 				$scondition .= " AND userId NOT IN({$blockIdList})";
 				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC' ));
 
@@ -1030,7 +1018,7 @@ class SearchController extends Controller
 				{
 					$searchText.= "Do not show ignored profiles ,";
 					if($user->profileBlock){
-						$blockedIds	= $user->profileBlock->profileIDs;
+						$blockedIds	= $this->getBlockedIds($user);
 					}
 				}
 
@@ -1120,10 +1108,20 @@ class SearchController extends Controller
 		{
 			$user = Users::model()->findByAttributes(array('marryId'=>$_GET['id']),'active=1');
 			$loggedUser = Yii::app()->session->get('user');
+			$blocked = $this->getBlockedIds($loggedUser);
+			$blockedUsers = array();
+			if(isset($blocked) && !empty($blocked))
+			$blockedUsers = explode(",", $blocked);
+			
+			if(isset($user->name) && in_array($user->userId, $blockedUsers))
+			$user = null;
+			
 			if(isset($user->name))
 			{
 						
 				if(isset($loggedUser) && $loggedUser->marryId != $user->marryId ){
+					
+					$this->sendEmail($loggedUser,$user);
 					Yii::app()->getDb()->createCommand("SET time_zone='+05:30'")->execute();			
 					$profileView = Profileviews::model()->findByAttributes(array('visitedId'=>$user->userId,'userID'=>$loggedUser->userId ));
 					if(isset($profileView))
@@ -1142,6 +1140,7 @@ class SearchController extends Controller
 						$prfile->save();
 					}
 				}
+								
 				$this->render('idProfile',array('model'=>$user));
 			}
 			else
@@ -1268,6 +1267,147 @@ class SearchController extends Controller
 				} 
 		}
 	}
+	
+	private function getBlockedIds($user)
+	{
+		if(isset($user))
+		{
+			$profile = $user->profileBlock;
+			$profileIds = $profile->profileIDs;
+			if(!empty($profileIds))
+			return $profileIds;
+		}
+		else
+		return null;
+	}
+	
+	private function sendEmail($loggedUser,$user)
+	{
+		$heightArray = Utilities::getHeights();
+				$body = '<html><body>
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="font-family:Arial,Helvetica,sans-serif">
+    <tbody>
+        <tr>
+            <td>
+                <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="left" style="background:#c8bfe7;padding-top:5px;padding-bottom:5px">
+                    <tbody>
+                        <tr>
+                            <td width="100%" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7">
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#7c51a1" align="center" style="background-color:#7c51a1;margin-bottom:5px">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="middle" height="80"><span style="color:#ffffff;font-size:50px;margin-left:20px;float:left">marrydoor</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7;margin-top:5px;margin-bottom:5px">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="middle" height="35"><span style="color:#ffffff;font-size:24px;margin-left:20px;float:left">Wow..! You got a visitor!</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding-bottom:30px;padding-top:30px"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <font style="font:normal 20px arial;text-align:justify;color:#408ef8;float:left;margin-left:20px;margin-right:20px;margin-bottom:10px">
+                                                    <a target="_blank" href="https://google.com" style="text-decoration:none;color:#408ef8">Hi '.$user->name.' ('.$user->marryId.'), </a>
+                                                    
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float:left;margin-left:20px;margin-right:20px">
+                                                     '.$loggedUser->name.' '.($loggedUser->marryId).' Visited your profile.
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <table width="570" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;margin-top:5px;margin-bottom:5px;padding-bottom:20px;padding-top:20px">
 
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="570" valign="top" bgcolor="#edeaf7" align="center">
+                                                                <table width="550" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border:1px solid #3cc3ee;margin-bottom:10px;margin-top:10px">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td width="100" valign="top" align="center"><img width="64" height="64" border="0" style="border:1px solid #876099;float:left;margin-bottom:10px;margin-left:10px;margin-right:10px;margin-top:10px;background-color:#faf8ff" src="'.Utilities::getProfileImage($user->marryId,'').'" alt=""></td>
+
+
+                                                                            <td width="250" valign="top" align="left" style="font:normal 11px arial;color:#606060;padding-top:10px;padding-bottom:10px;padding-right:10px">
+                                                                                <span style="font:bold 11px arial;color:#606060">
+                                                                                    <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$loggedUser->marryId.'" style="text-decoration:none;color:#606060">'.$loggedUser->name.'('.$loggedUser->marryId.')</a><br>
+                                                                                </span>'.
+                                                                        
+        Utilities::getAgeFromDateofBirth($loggedUser->dob).' yrs,  '. $heightArray[$loggedUser->physicaldetails->heightId].' | '.$loggedUser->userpersonaldetails->religion->name.':  '. $loggedUser->userpersonaldetails->caste->name.'| 
+		'.$loggedUser->userpersonaldetails->district->name.','. $loggedUser->userpersonaldetails->state->name.','. $loggedUser->userpersonaldetails->country->name.' | '.$loggedUser->educations->education->name.' |'.$loggedUser->educations->occupation->name.'
+                                                                        
+    </td>
+                                                                            <td width="200" valign="top" align="left" style="padding-top:10px;padding-left:15px;padding-right:5px;padding-bottom:5px">
+                                                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td valign="top" style="font:normal 11px arial;color:#646464">
+                                                                                                <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$loggedUser->marryId.'" style="font:normal 11px arial;color:#408ef8;text-decoration:none;outline:none">View Full Profile »</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                                <font style="font:normal 14px arial;text-align:justify;color:#ffffff;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px;float:left">
+                                                    Wishing You all the very best in Your partner search, <br> Team - MARRYDOOR
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" height="50" bgcolor="#ffffff">
+                                                <font style="font:normal 12px arial;text-align:justify;color:#939598;float:left;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px">
+                                                    You are a 
+MarryDoor.com member. This e-mail comes to you in accordance with 
+MarryDoor.com Privacy Policy.MarryDoor.com is not responsible for content other 
+than its own and makes no warranties or guaratees about the products or 
+services that are advetised.
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>';
+       				Utilities::sendClaimEmail($user->emailId,'Wow..! You got a visitor!',$body);
+		
+	}
 	
 }

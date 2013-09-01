@@ -16,137 +16,15 @@ class InterestController extends Controller
 	
        public function actionInsert()
        {
-       	$heightArray = Utilities::getHeights();
+       	
        		if(isset($_POST['userId']))
        		{
        			$user = Yii::app()->session->get('user');
        			$user = Users::model()->findbyPk($user->userId);
        			$isInterest = $user->interestSender(array('condition'=>"receiverId = {$_POST['userId']}"));
        			if(!isset($isInterest) || empty($isInterest)) {
-       				$interester = Users::model()->findbyPk($_POST['userId']);
-       				$body = '<html><body>
-<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="font-family:Arial,Helvetica,sans-serif">
-    <tbody>
-        <tr>
-            <td>
-                <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="left" style="background:#c8bfe7;padding-top:5px;padding-bottom:5px">
-                    <tbody>
-                        <tr>
-                            <td width="100%" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7">
-                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#7c51a1" align="center" style="background-color:#7c51a1;margin-bottom:5px">
-                                    <tbody>
-                                        <tr>
-                                            <td valign="middle" height="80"><span style="color:#ffffff;font-size:50px;margin-left:20px;float:left">marrydoor</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7;margin-top:5px;margin-bottom:5px">
-                                    <tbody>
-                                        <tr>
-                                            <td valign="middle" height="35"><span style="color:#ffffff;font-size:24px;margin-left:20px;float:left">Wow..! You got a new interest!</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding-bottom:30px;padding-top:30px"> 
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top" bgcolor="#ffffff">
-                                                <font style="font:normal 20px arial;text-align:justify;color:#408ef8;float:left;margin-left:20px;margin-right:20px;margin-bottom:10px">
-                                                    <a target="_blank" href="https://google.com" style="text-decoration:none;color:#408ef8">Hi '.$interester->name.' ('.$interester->marryId.'), </a>
-                                                    
-                                                </font>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top" bgcolor="#ffffff">
-                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float:left;margin-left:20px;margin-right:20px">
-                                                     '.$user->name.' '.($user->marryId).' Expressed a interest on you.
-                                                </font>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td valign="top" bgcolor="#ffffff">
-                                                <table width="570" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;margin-top:5px;margin-bottom:5px;padding-bottom:20px;padding-top:20px">
-
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="570" valign="top" bgcolor="#edeaf7" align="center">
-                                                                <table width="550" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border:1px solid #3cc3ee;margin-bottom:10px;margin-top:10px">
-                                                                    <tbody>
-                                                                        <tr>
-                                                                            <td width="100" valign="top" align="center"><img width="64" height="64" border="0" style="border:1px solid #876099;float:left;margin-bottom:10px;margin-left:10px;margin-right:10px;margin-top:10px;background-color:#faf8ff" src="'.Utilities::getProfileImage($user->marryId,'').'" alt=""></td>
-
-
-                                                                            <td width="250" valign="top" align="left" style="font:normal 11px arial;color:#606060;padding-top:10px;padding-bottom:10px;padding-right:10px">
-                                                                                <span style="font:bold 11px arial;color:#606060">
-                                                                                    <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$user->marryId.'" style="text-decoration:none;color:#606060">'.$user->name.'('.$user->marryId.')</a><br>
-                                                                                </span>'.
-                                                                        
-        Utilities::getAgeFromDateofBirth($user->dob).' yrs,  '. $heightArray[$user->physicaldetails->heightId].' | '.$user->userpersonaldetails->religion->name.':  '. $user->userpersonaldetails->caste->name.'| 
-		'.$user->userpersonaldetails->district->name.','. $user->userpersonaldetails->state->name.','. $user->userpersonaldetails->country->name.' | '.$user->educations->education->name.' |'.$user->educations->occupation->name.'
-                                                                        
-    </td>
-                                                                            <td width="200" valign="top" align="left" style="padding-top:10px;padding-left:15px;padding-right:5px;padding-bottom:5px">
-                                                                                <table cellspacing="0" cellpadding="0" border="0">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td valign="top" style="font:normal 11px arial;color:#646464">
-                                                                                                <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$user->marryId.'" style="font:normal 11px arial;color:#408ef8;text-decoration:none;outline:none">View Full Profile »</a>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                       
-                                    </tbody>
-                                </table>
-                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7"> 
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top">
-                                                <font style="font:normal 14px arial;text-align:justify;color:#ffffff;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px;float:left">
-                                                    Wishing You all the very best in Your partner search, <br> Team - MARRYDOOR
-                                                </font>
-                                            </td>
-                                        </tr>  
-                                    </tbody>
-                                </table>
-                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff"> 
-                                    <tbody>
-                                        <tr>
-                                            <td valign="top" height="50" bgcolor="#ffffff">
-                                                <font style="font:normal 12px arial;text-align:justify;color:#939598;float:left;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px">
-                                                    You are a 
-MarryDoor.com member. This e-mail comes to you in accordance with 
-MarryDoor.com Privacy Policy.MarryDoor.com is not responsible for content other 
-than its own and makes no warranties or guaratees about the products or 
-services that are advetised.
-                                                </font>
-                                            </td>
-                                        </tr>  
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</body>
-</html>';
-       				Utilities::sendClaimEmail($interester->emailId,'Wow..! You got a new interest!',$body);
+       				$receiver = Users::model()->findbyPk($_POST['userId']);
+       				$this->sendEmail($receiver,$user,'Wow..! You got a new interest!',' Expressed a interest on you');
 					$interest = new Interests();
 		       		$interest->senderId =  $user->userId;
 		       		$interest->receiverId =  $_POST['userId'];
@@ -295,6 +173,8 @@ services that are advetised.
 				//short list, mutual acceptance
 
 				
+					$receiver = Users::model()->findbyPk($interest->senderId);
+       				$this->sendEmail($receiver,$user,'Wow..! You interest update!',' Accepted your interest request');
 				//add sender id to receiver short list
 				if(isset($user->shortlist))
 				{
@@ -467,6 +347,136 @@ services that are advetised.
 		}
 		
 		
+	}
+	
+	public function sendEmail($receiver,$sender,$subject,$status)
+	{
+		$heightArray = Utilities::getHeights();
+			//$status = ' Expressed a interest on you';
+			//$sub = 'Wow..! You got a new interest!';
+			$body = '<html><body>
+<table width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="font-family:Arial,Helvetica,sans-serif">
+    <tbody>
+        <tr>
+            <td>
+                <table width="600" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="left" style="background:#c8bfe7;padding-top:5px;padding-bottom:5px">
+                    <tbody>
+                        <tr>
+                            <td width="100%" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7">
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#7c51a1" align="center" style="background-color:#7c51a1;margin-bottom:5px">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="middle" height="80"><span style="color:#ffffff;font-size:50px;margin-left:20px;float:left">marrydoor</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7;margin-top:5px;margin-bottom:5px">
+                                    <tbody>
+                                        <tr>
+                                            <td valign="middle" height="35"><span style="color:#ffffff;font-size:24px;margin-left:20px;float:left">'.$subject.'</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding-bottom:30px;padding-top:30px"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <font style="font:normal 20px arial;text-align:justify;color:#408ef8;float:left;margin-left:20px;margin-right:20px;margin-bottom:10px">
+                                                    <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$receiver->marryId.'" style="text-decoration:none;color:#408ef8">Hi '.$receiver->name.' ('.$receiver->marryId.'), </a>
+                                                    
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <font style="font:normal 16px arial;text-align:justify;color:#666666;float:left;margin-left:20px;margin-right:20px">
+                                                     '.$sender->name.' '.($sender->marryId).$status.'
+                                                </font>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" bgcolor="#ffffff">
+                                                <table width="570" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff;margin-top:5px;margin-bottom:5px;padding-bottom:20px;padding-top:20px">
+
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="570" valign="top" bgcolor="#edeaf7" align="center">
+                                                                <table width="550" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="border:1px solid #3cc3ee;margin-bottom:10px;margin-top:10px">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td width="100" valign="top" align="center"><img width="64" height="64" border="0" style="border:1px solid #876099;float:left;margin-bottom:10px;margin-left:10px;margin-right:10px;margin-top:10px;background-color:#faf8ff" src="'.Utilities::getProfileImage($sender->marryId,'').'" alt=""></td>
+
+
+                                                                            <td width="250" valign="top" align="left" style="font:normal 11px arial;color:#606060;padding-top:10px;padding-bottom:10px;padding-right:10px">
+                                                                                <span style="font:bold 11px arial;color:#606060">
+                                                                                    <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$sender->marryId.'" style="text-decoration:none;color:#606060">'.$sender->name.'('.$sender->marryId.')</a><br>
+                                                                                </span>'.
+                                                                        
+        Utilities::getAgeFromDateofBirth($sender->dob).' yrs,  '. $heightArray[$sender->physicaldetails->heightId].' | '.$sender->userpersonaldetails->religion->name.':  '. $sender->userpersonaldetails->caste->name.'| 
+		'.$sender->userpersonaldetails->district->name.','. $sender->userpersonaldetails->state->name.','. $sender->userpersonaldetails->country->name.' | '.$sender->educations->education->name.' |'.$sender->educations->occupation->name.'
+                                                                        
+    </td>
+                                                                            <td width="200" valign="top" align="left" style="padding-top:10px;padding-left:15px;padding-right:5px;padding-bottom:5px">
+                                                                                <table cellspacing="0" cellpadding="0" border="0">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td valign="top" style="font:normal 11px arial;color:#646464">
+                                                                                                <a target="_blank" href="http://marrydoor.com/search/byid/id/'.$sender->marryId.'" style="font:normal 11px arial;color:#408ef8;text-decoration:none;outline:none">View Full Profile »</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#c8bfe7" align="center" style="background-color:#c8bfe7"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top">
+                                                <font style="font:normal 14px arial;text-align:justify;color:#ffffff;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px;float:left">
+                                                    Wishing You all the very best in Your partner search, <br> Team - MARRYDOOR
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                                <table width="590" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" align="center" style="background-color:#ffffff"> 
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" height="50" bgcolor="#ffffff">
+                                                <font style="font:normal 12px arial;text-align:justify;color:#939598;float:left;margin-left:20px;margin-right:20px;margin-top:10px;margin-bottom:10px">
+                                                    You are a 
+MarryDoor.com member. This e-mail comes to you in accordance with 
+MarryDoor.com Privacy Policy.MarryDoor.com is not responsible for content other 
+than its own and makes no warranties or guaratees about the products or 
+services that are advetised.
+                                                </font>
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>';
+       				Utilities::sendClaimEmail($receiver->emailId,$subject,$body);
 	}
 	
 }

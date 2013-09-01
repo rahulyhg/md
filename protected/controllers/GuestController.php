@@ -8,6 +8,24 @@ class GuestController extends Controller
 		$this->render('guest');
 	}
 	
+	public function actionTest()
+	{
+		/*$user = Yii::app()->session->get('user');
+		$userPersonal = $user->userpersonaldetails;
+		$this->render('horoscope');*/
+		$body = htmlentities("This is a test message",ENT_QUOTES, 'UTF-8');
+        set_time_limit(0);
+        Yii::import('application.extensions.*');
+        $message = new YiiMailMessage();
+       	$message->setTo(array('ageeshkg@gmail.com'));
+        $message->setFrom('info@marrydoor.com');
+        $message->setSubject('Your Password');
+        $message->setBody($body);
+        $numsent = Yii::app()->mail->send($message);
+	}
+	
+	
+	
 	public function actionForget()
 	{
 		$this->layout= '//layouts/popup';
@@ -174,24 +192,6 @@ services that are advetised.
 		else
 		$this->render('feedback');
 	}
-	
-	
-	public function actionTest()
-	{
-		
-			$feedback = new Feedback();
-			$feedback->friendliness = 1;
-			$feedback->service = 2;
-			$feedback->privacy = 3;
-			$feedback->payment = 5; 
-			//$feedback->reseller = "fried4";
-			//$feedback->name = "fried5"; 
-			//$feedback->email = "fried6";
-			//$feedback->message = "fried7";
-			//$feedback->feedType = "fried8";
-			$feedback->save();
-	}
-	
 	
 	public function actionUser()
 	{
