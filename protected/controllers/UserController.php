@@ -115,7 +115,6 @@ class UserController extends Controller
 				if($form->login())
 				{
 					Yii::app()->session->add('user',$user);
-					Yii::log("Create the user succesfully with username {$user->name} and marry door ID {$user->marryId}");	
 				}
 				else
 				{

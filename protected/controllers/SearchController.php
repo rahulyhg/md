@@ -11,13 +11,14 @@ class SearchController extends Controller
 	public function actionIndex()
 	{
 		$user = Yii::app()->session->get('user');
-		$user = Users::model()->findbyPk($user->userId);
+		
 		if(!isset($user))
 		{
 			$this->render('index',array('tab'=>'tab1'));
 		}
 		else
 		{
+			$user = Users::model()->findbyPk($user->userId);
 			$this->render('regular',array('tab'=>'tab1'));
 		}
 		
@@ -397,8 +398,8 @@ class SearchController extends Controller
 				$searchText.= "with photo";
 			}
 
-			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,
-		'order'=> 'createdOn DESC' ));
+			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'distinct'=>true,
+		'order'=> 'createdOn DESC' ),'active=1');
 
 			if(sizeof($usersV) > 0 ){
 				$userIds = array();
@@ -560,7 +561,7 @@ class SearchController extends Controller
 			}
 		
 		
-			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC' ),'active=1');
+			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'distinct'=>true,'order'=> 'createdOn DESC' ,'limit' => 200),'active=1');
 		
 			
 		$userIds = array();
@@ -625,7 +626,7 @@ class SearchController extends Controller
 			$users = array();
 		
 			if(!empty($userList))
-			$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC' ));
+			$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ));
 		
 			$highLightUser = array();
 			$normalUser = array();
@@ -710,7 +711,7 @@ class SearchController extends Controller
 			}
 
 
-			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC' ));
+			$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'distinct'=>true,'order'=> 'createdOn DESC' ),'active=1');
 
 
 			$userIds = array();
@@ -724,7 +725,7 @@ class SearchController extends Controller
 				$scondition = " userId in ({$userList}) ";
 				if(isset($blockIdList) && !empty($blockIdList))
 				$scondition .= " AND userId NOT IN({$blockIdList})";
-				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC' ));
+				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
 
 
 				$highLightUser = array();
@@ -769,7 +770,6 @@ class SearchController extends Controller
 	}
 	
 	public function actionAdvance(){
-		
 		/* if(isset($_POST['search']) && $_POST['search'] == 'save')
 		{
 			
@@ -994,7 +994,7 @@ class SearchController extends Controller
 			}
 		}
 		
-		$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC' ));
+		$usersV = ViewUsers::model()->findAll(array('condition'=>$condition,'distinct'=>true,'order'=> 'createdOn DESC' ),'active=1');
 		
 		$userIds = array();
 		$userList = null;
@@ -1058,7 +1058,7 @@ class SearchController extends Controller
 		$users = array();
 		
 		if(!empty($userList))
-		$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC' ));
+		$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
 		
 		
 		if(sizeof($users) > 0 )
@@ -1224,7 +1224,7 @@ class SearchController extends Controller
 				
 			}
 			
-		$users = Users::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC' ),'active=1');
+		$users = Users::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
 		
 		$highLightUser = array();
 		$normalUser = array();

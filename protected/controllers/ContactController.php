@@ -455,6 +455,8 @@ class ContactController extends Controller
 		$horoscope->city = $_POST['city'];
 		if(isset($_POST['state']))
 		$horoscope->state = $_POST['state'];
+		if(isset($_POST['motherTounge']))
+		$horoscope->motherTounge = $_POST['motherTounge'];
 		if(isset($_POST['country']))
 		$horoscope->country = $_POST['country'];
 		if(isset($_POST['hours']) || isset($_POST['minutes']) || isset($_POST['seconds']) || isset($_POST['am']))
