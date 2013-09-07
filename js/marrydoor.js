@@ -150,7 +150,8 @@ $(function(){
 		function add(select1,select2)
 		{
 			$('#'+select1+' option:selected').appendTo('#'+select2);
-			return false;
+			$('#'+select2+' option').prop('selected', true);
+			return true;
 		}
 		
 		// User defined functions

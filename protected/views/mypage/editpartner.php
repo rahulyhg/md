@@ -113,7 +113,7 @@
 							<input type="radio" name="child" class="validate[required] radio" <?php if($child == 2) {?> checked="checked" <?php } ?>  value="2"> <span>Yes. not living together</span>
 						</div>
 						<div class="radio mR14">
-							<input type="radio" name="child" class="validate[required] <?php if($child == 3) {?> checked="checked" <?php } ?>  radio" value="3"> <span>No </span>
+							<input type="radio" name="child" class="validate[required] radio" <?php if($child == 3) {?> checked="checked" <?php } ?>  value="3"> <span>No </span>
 						</div>
 					</div>
 				</li>
@@ -612,6 +612,21 @@
 
 	<script type="text/javascript">
 $(document).ready(function(){
+
+	$("input:submit").click(function() { 
+		$('#caste1 option').prop('selected', true);
+		$('#star1 option').prop('selected', true);
+		$('#language1 option').prop('selected', true);
+		$('#country1 option').prop('selected', true);
+		$('#citizen1 option').prop('selected', true);
+		$('#state1 option').prop('selected', true);
+		$('#district1 option').prop('selected', true);
+		$('#occupation1 option').prop('selected', true);
+		this.form.submit();
+		return false;
+		
+	});
+			
 	$("#userPartner").validationEngine('attach');
     
     $("input:reset").click(function() {       // apply to reset button's click event
