@@ -71,7 +71,7 @@
 				<div class="leftC">Country of birth</div>
 				<div class="rightC">
 					<strong>:</strong> <span><?php 
-					if(isset($astro->country))
+					if(isset($astro->country) && !empty($astro->country))
 					{
 						$country = Country::model()->findbyPk($astro->country);
 						echo $country->name; 
@@ -83,7 +83,7 @@
 				<div class="leftC">State of birth</div>
 				<div class="rightC">
 					<strong>:</strong> <span><?php 
-					if(isset($astro->state))
+					if(isset($astro->state)&& !empty($astro->state))
 					{
 						$state = States::model()->findbyPk($astro->state);
 						echo $state->name; 
@@ -95,7 +95,7 @@
 				<div class="leftC">City of birth</div>
 				<div class="rightC">
 					<strong>:</strong> <span><?php 
-					if(isset($astro->city))
+					if(isset($astro->city) && !empty($astro->city))
 					{
 						echo $astro->city; 
 					}
@@ -117,7 +117,7 @@
 				<div class="leftC">Language</div>
 				<div class="rightC">
 					<strong>:</strong> <span><?php 
-					if(isset($astro->motherTounge))
+					if(isset($astro->motherTounge) && !empty($astro->motherTounge))
 					{
 						$lang = Languages::model()->findbyPk($astro->motherTounge);
 						if(isset($lang))

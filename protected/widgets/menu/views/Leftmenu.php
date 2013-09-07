@@ -54,7 +54,7 @@
         
         <ul class="left-bar-data">
             <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','index',array()); ?>" class="select headLink">My Page</a></li>
-            <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','profile',array()); ?>" class="headLink">My Profile</a></li>
+            <li><a target="_blank" href="<?php echo Utilities::createAbsoluteUrl('mypage','profile',array()); ?>" class="headLink">My Profile</a></li>
             <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','account',array()); ?>" class="headLink">My Account</a></li>
             <li>
 				<a href="<?php echo Utilities::createAbsoluteUrl('mypage','document',array()); ?>" class="headLink">My Documents</a>

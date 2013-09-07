@@ -104,7 +104,7 @@
         </div>
          <?php if(isset($users)){ ?>
         <div class="pagination-contnr">
-            <div class="select-contnr"><input type="checkbox" /> Select All</div>
+            <div class="select-contnr"><input type="checkbox" class="selection" name="selection" />  Select All</div>
              <a id="rmv-large1" href="#">Remove Bookmark</a>
             <?php if(isset($totalPage) && intval($totalPage) > 1) { ?>
             <ul class="pagination">

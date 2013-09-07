@@ -304,9 +304,9 @@ class MypageController extends Controller
 		}	
 			
 		$address = new Address();
-		$address->addresType = 0;
+		$address->addresType = 1;
 		$address->userId = $user->userId; 
-		//communication address
+		//permanent address
 		if(isset($_POST['house1']))
 		$address->houseName = $_POST['house1'];
 		if(isset($_POST['houseplace1']))
@@ -326,9 +326,9 @@ class MypageController extends Controller
 		$address->save();
 		
 		
-		//permanent address
+		//communication address
 		$paddress = new Address();
-		$paddress->addresType = 1;
+		$paddress->addresType = 0;
 		$paddress->userId = $user->userId;
 		if(isset($_POST['house']))
 		$paddress->houseName = $_POST['house'];
