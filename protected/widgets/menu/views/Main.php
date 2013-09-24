@@ -12,9 +12,9 @@
 						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('bookmark','index')?>">Bookmarks</a>
 						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('addressbook','index')?>">My Address Book</a>
 						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('mypage','partnerpreference')?>">Partner preference</a>
-						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('payment','summary')?>">My Payment summury</a>
 						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('mypage','account')?>">My Account</a>
-						<!-- <a class="width100" href="<?php echo Utilities::createAbsoluteUrl('mypage','settings')?>">Privacy settings</a> -->
+						<!-- <a class="width100" href="<?php echo Utilities::createAbsoluteUrl('payment','summary')?>">My Payment summury</a>
+						<a class="width100" href="<?php echo Utilities::createAbsoluteUrl('mypage','settings')?>">Privacy settings</a> -->
 						
 					</div>
 				</div>
@@ -90,7 +90,7 @@
 				</div>
 				<?php }?>
             </li>
-            <li class="menu">
+            <li class="menu" style="display: none">
                 <a class="link" href="javascript:void(0)">payment options</a>
                 <?php if(Yii::app()->session->itemAt('user')) {?>
                 <div class="sub" style="display:none">

@@ -15,7 +15,9 @@
 				<a href="<?php echo Utilities::createAbsoluteUrl('mypage','',array()); ?>" class="pName"><?php echo $user->name?></a>
 			</li>
         </ul>
-        <?php if($user->userType == 1) { 
+        <?php 
+        if(false){
+        if($user->userType == 1) { 
         $payments = $user->payment(array('condition'=>"actionItem = 'membership'",'order'=> 'startdate DESC limit 0,1'));
         if(isset($payments) && isset($payments[0]))
         {
@@ -50,7 +52,8 @@
 				<div class="subOnly">Only for <span class="WebRupee">Rs.</span><span class="forAmt">200!</span></div>
 			</li>
         </ul>
-        <?php }?>
+        <?php }
+        }?>
         
         <ul class="left-bar-data">
             <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','index',array()); ?>" class="select headLink">My Page</a></li>
@@ -106,8 +109,8 @@
 					<p>Address book is a place to where you can import the address to my address book. This way you can access the details later without visiting a particular profile again. </p>
 				</div>
 			</li>
-			<li><a href="<?php echo Utilities::createAbsoluteUrl('payment','summary',array()); ?>" class="headLink">My Payment summery</a></li>
-			<!--  <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','settings',array()); ?>" class="headLink">My Settings</a></li> -->
+			<!--<li><a href="<?php echo Utilities::createAbsoluteUrl('payment','summary',array()); ?>" class="headLink">My Payment summery</a></li>
+			  <li><a href="<?php echo Utilities::createAbsoluteUrl('mypage','settings',array()); ?>" class="headLink">My Settings</a></li> -->
         </ul>
         <ul class="left-bar-data">
             <li>
