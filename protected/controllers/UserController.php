@@ -47,6 +47,7 @@ class UserController extends Controller
 				$user->motherTounge = $_POST['motherTounge'];
 				$user->createdOn = new CDbExpression('NOW()');
 				$user->active = '0';
+				$user->userType = 1; 
 				$user->save();
 					
 				//marrydoor ID updated

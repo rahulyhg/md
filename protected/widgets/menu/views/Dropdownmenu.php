@@ -52,7 +52,7 @@ $heightArray = Utilities::getHeights();
 				<li>
 					<a href="#"><img alt="" src="<?php echo Utilities::getProfileImage($interest['receiverMarryId'],$interest['receiverImageName']); ?>"></a>
 					<div class="int_head">
-						<a href="#"><?php echo $interest['receiverName']; ?></a>
+						<a target="_blank"  href="<?php echo '/search/byid/id='.$interest['receiverMarryId'] ?>" ><?php echo $interest['receiverName']; ?></a>
 						<span>(
 						<?php if($interest['status'] == 0){
 							$status = "Expressed";

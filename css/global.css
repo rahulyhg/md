@@ -1250,6 +1250,7 @@ h5{
     float: left;
     border: 1px solid #E9EAEA;
     text-align: center;
+	display: none;
 }
 .subscribe-box .sub-now{
     width: 100%;
@@ -2318,5 +2319,13 @@ div.ajax-progress {
   -moz-border-radius:    10px;
   -webkit-border-radius: 10px;
   border-radius:         10px;
-}	
+}
 
+.fullWidth{
+	width: 962px !important;
+}
+.subContnr textarea{
+	float: left;
+	width:98.4%;
+	margin: 10px 0;
+}
