@@ -23,7 +23,7 @@
         {
         	$payment = $payments[0]
 		?>
-		<ul class="left-bar-data">
+		<ul class="left-bar-data" style="display: none">
 			<li>
 			<?php 
         	$currentDate = new DateTime('now');
@@ -45,7 +45,7 @@
        <?php 	
         }	
         } else {?>
-        <ul class="left-bar-data">
+        <ul class="left-bar-data" style="display: none">
 			<li>
 				<div class="uNot">You Have Not Subscribed Yet!!</div>
 				<a href="/payment" class="subNow">Subscribe NOW!</a>

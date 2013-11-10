@@ -12,6 +12,9 @@ class UserController extends Controller
                         return false;
                 }       
                 else{
+					if($action->id == "success"){
+						return true;
+					}
                 	if(isset($user->userloggeddetails) && sizeof($user->userloggeddetails) > 0)
                 	{
                 		$this->redirect(array('/mypage'));
@@ -22,31 +25,40 @@ class UserController extends Controller
                 }
         }   
 	  
-	
+	  public function actionSuccess(){
+			$user = Yii::app()->session->get('user');
+            if(!isset($user)) {
+				  $this->redirect(Yii::app()->user->loginUrl);
+				  return false;
+            }       
+			Yii::app()->controller->renderPartial('pleasewait',array());
+	  }
+
 	public function actionRegister()
 	{
 		$user = new Users();
 		$userPersonal = new Userpersonaldetails();
 		$view = 'success';
 		Yii::app()->getDb()->createCommand("SET time_zone='+05:30'")->execute();
-		if(isset($_POST['UserForm']))
+		if(isset($_POST['UserForm']) || (isset($_POST['fName']) && isset($_POST['lName']) && isset($_POST['emailId']) && isset($_POST['password'])))
 		{
 			$transaction = Yii::app()->db->beginTransaction();
 			try{
+				
 				//users table
 				$dob = $_POST['year'].'-'.$_POST['month'].'-'.$_POST['date'];
-				$user->emailId = $_POST['UserForm']['emailId'];
-				$user->password = new CDbExpression("MD5('{$_POST['UserForm']['password']}')");
-				$user->name = $_POST['UserForm']['name'];
-				$password = $_POST['UserForm']['password'];
+				$user->emailId = isset($_POST['UserForm']['emailId']) ? $_POST['UserForm']['emailId'] : $_POST['emailId'];
+				$user->password = isset($_POST['UserForm']['password']) ? new CDbExpression("MD5('{$_POST['UserForm']['password']}')") : new CDbExpression("MD5('{$_POST['password']}')");
+				$user->name = isset($_POST['UserForm']['name']) ? $_POST['UserForm']['name'] : $_POST['fName']." ".$_POST['lName'];
+				$password = isset($_POST['UserForm']['password']) ? $_POST['UserForm']['password'] : $_POST['password'];
 				if(isset($_POST['date']) && isset($_POST['month']) && isset($_POST['year']) )
 				{	
 					$user->dob = $dob;
 				}
 				$user->gender = $_POST['gender'];
-				$user->motherTounge = $_POST['motherTounge'];
+				$user->motherTounge = isset($_POST['motherTounge']) ? $_POST['motherTounge'] : 0;
 				$user->createdOn = new CDbExpression('NOW()');
-				$user->active = '0';
+				$user->active = '1';
 				$user->userType = 1; 
 				$user->save();
 					
@@ -91,12 +103,12 @@ class UserController extends Controller
 				$userPersonal->userId = $user->primaryKey;
 				$userPersonal->casteId = $_POST['caste'];
 				$userPersonal->religionId  = $_POST['religion'];
-				$userPersonal->countryId = $_POST['country'];
+				$userPersonal->countryId = isset($_POST['country']) ? $_POST['country'] : 1;
 				$userPersonal->districtId = '1';
 				$userPersonal->placeId = '1';
 				$userPersonal->stateId = $_POST['state'];
-				$userPersonal->mobilePhone = $_POST['UserForm']['mobileNo'];
-				$userPersonal->landPhone = $_POST['UserForm']['mobileNo'];
+				$userPersonal->mobilePhone = isset($_POST['UserForm']['mobileNo']) ? $_POST['UserForm']['mobileNo'] : $_POST['mobileNo'];
+				$userPersonal->landPhone = isset($_POST['UserForm']['mobileNo']) ? $_POST['UserForm']['mobileNo'] : $_POST['mobileNo'];
 				$userPersonal->save();
 				$user->save();	
 				$transaction->commit();
@@ -127,7 +139,11 @@ class UserController extends Controller
 		}
 		else 
 		{
-		$this->redirect(array('/site'));
+			//$this->redirect(array('/site'));
+			Yii::app()->user->logout();
+			Yii::app()->session->clear();
+			Yii::app()->session->destroy();
+			$this->redirect(Yii::app()->homeUrl);
 		}
 	}
 

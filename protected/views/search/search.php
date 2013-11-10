@@ -112,19 +112,10 @@
             <a id="exInterest" class="expressInterests" href="#">Express Interest</a>
             <a id="exBookmark">Bookmark</a>
             
-           <?php } if(isset($totalPage) && intval($totalPage) > 1) { ?>
-            <ul class="pagination">
-                <li><span class="fir"><a href="#">First</a></span></li>
-                <li><span class="nex"><a href="#">Next</a></span></li>
-                <li><span class="pre"><a href="#">Previous</a></span></li>
-                <li><span class="last"><a href="#">Last</a></span></li>
-            </ul>
-            <input type="hidden" value="<?php echo $totalPage?>" name="totalPage" />
-          <input type="hidden" value="1" name="currentPage" />
-          <input type="hidden" value="<?php echo $totalUser ?>" name="user" />
-          <input type="hidden" value="1" name="firstPage" />
-           <input type="hidden" value="<?php echo $totalPage?>" name="lastPage" />
-                 <?php } ?>       
+           <?php //} if(isset($totalPage) && intval($totalPage) > 1) { ?>
+		   <?php } if(isset($pagination) && !empty($pagination)) {
+			   echo $pagination;
+			} ?>       
           
         </div>
         <?php }?>
@@ -206,19 +197,10 @@
             <div class="select-contnr"><input type="checkbox" class="selection" name="selection" />Select All</div>
             <a id="exInterest" class="expressInterests" href="#">Express Interest</a>
             <a id="exBookmark" >Bookmark</a>
-             <?php } if(isset($totalPage) && intval($totalPage) > 1) { ?>
-            <ul class="pagination">
-                <li><span class="fir"><a href="#">First</a></span></li>
-                <li><span class="nex"><a href="#">Next</a></span></li>
-                <li><span class="pre"><a href="#">Previous</a></span></li>
-                <li><span class="last"><a href="#">Last</a></span></li>
-            </ul>
-            <input type="hidden" value="<?php echo $totalPage?>" name="totalPage" />
-          <input type="hidden" value="1" name="currentPage" />
-          <input type="hidden" value="<?php echo $totalUser ?>" name="user" />
-          <input type="hidden" value="1" name="firstPage" />
-           <input type="hidden" value="<?php echo $totalPage?>" name="lastPage" />
-                 <?php } ?>       
+             <?php //} if(isset($totalPage) && intval($totalPage) > 1) { ?>
+            <?php } if(isset($pagination) && !empty($pagination)) {
+			   echo $pagination;
+			} ?> 
           
         </div>
     </section>
@@ -255,106 +237,6 @@
 		}
 
 		});	
-
-	   
-	var totalPage = parseInt($("input[name='totalPage']").val());
-	var totalUser = parseInt($("input[name='user']").val());
-	var currentPage = parseInt($("input[name='currentPage']").val());
-	var lastPage = parseInt($("input[name='lastPage']").val());
-	var firstPage = parseInt($("input[name='firstPage']").val());
-	
-		
-		
-	$('.fir').click(function (){
-		$('.nex').show();
-		$('.fir').hide();
-		$('.last').show();
-		currentPage = parseInt($("input[name='currentPage']").val());
-		if(currentPage == 1)
-		{
-			return;
-		}
-		$('.pre').hide();
-		$('div[id^="normal"]').hide();
-		var example = 10;
-		for (var i= 1; i <= example; i++)
-		{
-			if( example <= totalUser)
-			{	
-				$('div#normal'+i).show();
-			}
-		}
-		$("input[name='currentPage']").val("1");
-		
-		});
-
-	$('.pre').click(function (){
-		$('.nex').show();
-		$('.last').show();
-		currentPage = parseInt($("input[name='currentPage']").val());
-		if(currentPage == 1)
-		{
-			return;
-		}	
-		$('div[id^="normal"]').hide();
-		currentPage = currentPage - 1;
-		var index = currentPage * 10;
-		for (var i = index - 9;  i <=  index; i++)
-		{
-			$('div#normal'+i).show();
-		}
-		
-		$("input[name='currentPage']").val(currentPage);
-	});
-
-	$('.nex').click(function (){
-		$('.pre').show();
-		$('.fir').show();
-		
-		currentPage = parseInt($("input[name='currentPage']").val());
-		lastPage = parseInt($("input[name='lastPage']").val());
-		if(currentPage == lastPage )
-		{
-			return;
-		}	
-		$('div[id^="normal"]').hide();
-		var index = currentPage * 10;
-		currentPage = currentPage + 1;
-		
-		for (var i = index+1 ;  i <= currentPage * 10 ; i++)
-		{
-			if(i <= totalUser){
-			$('div#normal'+i).show();
-			}
-		}
-		
-		$("input[name='currentPage']").val(currentPage);
-	
-			
-	});
-
-	$('.last').click(function (){
-		$('.pre').show();
-		$('.nex').hide();
-		$('.fir').show();
-		$('.last').hide();
-		currentPage = parseInt($("input[name='currentPage']").val());
-		lastPage = parseInt($("input[name='lastPage']").val());
-		
-		if(lastPage == currentPage)
-		{
-			return;
-		}	
-		$('div[id^="normal"]').hide();
-		var index = lastPage -1 ;
-		for (var i = (index * 10) + 1;  i <= totalUser; i++)
-		{
-			$('div#normal'+i).show();
-		}
-	
-		$("input[name='currentPage']").val(lastPage);
-		
-	});
 
 	 //check for selection all button
 	 $('.selection').change(function () {

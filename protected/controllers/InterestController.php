@@ -164,8 +164,6 @@ class InterestController extends Controller
 			}
 			Utilities::executeRawQuery($query);
 			
-			
-			
 			if($action == 'accept')
 			{
 				
@@ -236,7 +234,6 @@ class InterestController extends Controller
 			}
 
 		}
-			
 		//received interests
 		$sql = "SELECT * FROM view_interests WHERE receiverId = {$user->userId} and status = 0 and receiverStatus = 0";
 		$command=Yii::app()->db->createCommand($sql);

@@ -60,7 +60,7 @@ $heightArray = Utilities::getHeights(); ?>
 						<a href="<?php echo Utilities::createAbsoluteUrl('search','byid',array('id'=>$receive['senderMarryId'])); ?>" ><?php echo $receive['senderName']; ?></a>
 						<span>(Expressed interest on <?php echo $receive['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($receive['senderReligion']))echo $receive['senderReligion'] ;?>, <?php if(isset($receive['senderCaste']))echo $receive['senderCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($receive['senderAge']); ?> Years - <?php if(isset($receive['senderHeightId']))echo $heightArray[$receive['senderHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($receive['senderReligion']))echo $receive['senderReligion'] ;?>, <?php if(isset($receive['senderCaste']))echo $receive['senderCaste'] ;?>, <?php echo $receive['senderAge']; ?> Years - <?php if(isset($receive['senderHeightId']))echo $heightArray[$receive['senderHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($receive['senderPlace']))echo $receive['senderPlace'] ;?>, <?php if(isset($receive['senderState']))echo $receive['senderState'] ;?>, <?php if(isset($receive['senderCountry']))echo $receive['senderCountry'] ;?></div>
 					<a href="#" class="type6 accept" onclick="doInterestAction(<?php echo $receive['interestId']; ?>,'accept','received');">Accept</a>
 					<a href="#" class="type6 decline" onclick="doInterestAction(<?php echo $receive['interestId']; ?>,'decline','received');">Decline</a>
@@ -84,7 +84,7 @@ $heightArray = Utilities::getHeights(); ?>
 						<a href="<?php echo Utilities::createAbsoluteUrl('search','byid',array('id'=>$send['receiverMarryId'])); ?>" ><?php echo $send['receiverName']; ?></a>
 						<span>(You expressed interest on <?php echo $send['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($send['receiverReligion']))echo $send['receiverReligion'] ;?>, <?php if(isset($send['receiverCaste']))echo $send['receiverCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($send['receiverAge']); ?> Years - <?php if(isset($send['receiverHeightId']))echo $heightArray[$send['receiverHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($send['receiverReligion']))echo $send['receiverReligion'] ;?>, <?php if(isset($send['receiverCaste']))echo $send['receiverCaste'] ;?>, <?php echo $send['receiverAge']; ?> Years - <?php if(isset($send['receiverHeightId']))echo $heightArray[$send['receiverHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($send['receiverPlace']))echo $send['receiverPlace'] ;?>, <?php if(isset($send['receiverState']))echo $send['receiverState'] ;?>, <?php if(isset($send['receiverCountry']))echo $send['receiverCountry'] ;?></div>
 					<a href="#" class="type6 decline" onclick="doInterestAction(<?php echo $send['interestId']; ?>,'cancel','sent');">Cancel</a>
 				</li>
@@ -120,7 +120,7 @@ $heightArray = Utilities::getHeights(); ?>
 							else echo 'She';
 						}?>	accepted your interest on <?php echo $accept['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($accept['receiverReligion']))echo $accept['receiverReligion'] ;?>, <?php if(isset($accept['receiverCaste']))echo $accept['receiverCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($accept['receiverAge']); ?> Years - <?php if(isset($accept['receiverHeightId']))echo $heightArray[$accept['receiverHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($accept['receiverReligion']))echo $accept['receiverReligion'] ;?>, <?php if(isset($accept['receiverCaste']))echo $accept['receiverCaste'] ;?>, <?php echo $accept['receiverAge']; ?> Years - <?php if(isset($accept['receiverHeightId']))echo $heightArray[$accept['receiverHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($accept['receiverPlace']))echo $accept['receiverPlace'] ;?>, <?php if(isset($accept['receiverState']))echo $accept['receiverState'] ;?>, <?php if(isset($accept['receiverCountry']))echo $accept['receiverCountry'] ;?></div>
 					<?php if($accept['receiverId'] == $user->userId){?>
 					<a href="#" class="type6 decline" onclick="doInterestAction(<?php echo $accept['interestId']; ?>,'decline','accepted');">Decline</a>
@@ -145,7 +145,7 @@ $heightArray = Utilities::getHeights(); ?>
 						}
 						?> interest on <?php echo $accept['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($accept['receiverReligion']))echo $accept['receiverReligion'] ;?>, <?php if(isset($accept['receiverCaste']))echo $accept['receiverCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($accept['receiverAge']); ?> Years - <?php if(isset($accept['receiverHeightId']))echo $heightArray[$accept['receiverHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($accept['receiverReligion']))echo $accept['receiverReligion'] ;?>, <?php if(isset($accept['receiverCaste']))echo $accept['receiverCaste'] ;?>, <?php echo $accept['receiverAge']; ?> Years - <?php if(isset($accept['receiverHeightId']))echo $heightArray[$accept['receiverHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($accept['receiverPlace']))echo $accept['receiverPlace'] ;?>, <?php if(isset($accept['receiverState']))echo $accept['receiverState'] ;?>, <?php if(isset($accept['receiverCountry']))echo $accept['receiverCountry'] ;?></div>
 					<?php if($accept['receiverId'] == $user->userId){?>
 					<a href="#" class="type6 decline" onclick="doInterestAction(<?php echo $accept['interestId']; ?>,'decline','accepted');">Decline</a>
@@ -186,7 +186,7 @@ $heightArray = Utilities::getHeights(); ?>
 							else echo 'She';
 						}?> expressed interest on <?php echo $decline['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($decline['receiverReligion']))echo $decline['receiverReligion'] ;?>, <?php if(isset($decline['receiverCaste']))echo $decline['receiverCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($decline['receiverAge']); ?> Years - <?php if(isset($decline['receiverHeightId']))echo $heightArray[$decline['receiverHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($decline['receiverReligion']))echo $decline['receiverReligion'] ;?>, <?php if(isset($decline['receiverCaste']))echo $decline['receiverCaste'] ;?>, <?php echo $decline['receiverAge']; ?> Years - <?php if(isset($decline['receiverHeightId']))echo $heightArray[$decline['receiverHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($decline['receiverPlace']))echo $decline['receiverPlace'] ;?>, <?php if(isset($decline['receiverState']))echo $decline['receiverState'] ;?>, <?php if(isset($decline['receiverCountry']))echo $decline['receiverCountry'] ;?></div>
 					<?php if($decline['receiverId'] == $user->userId){?>
 					<div class="pAction">You declined her interest on<?php echo $decline['sendDate']; ?></div>
@@ -216,7 +216,7 @@ $heightArray = Utilities::getHeights(); ?>
 							else echo 'She';
 						}?> expressed interest on <?php echo $decline['sendDate']; ?>)</span>
 					</div> 
-					<div class="pDetails"><?php if(isset($decline['receiverReligion']))echo $decline['receiverReligion'] ;?>, <?php if(isset($decline['receiverCaste']))echo $decline['receiverCaste'] ;?>, <?php echo Utilities::getAgeFromDateofBirth($decline['receiverAge']); ?> Years - <?php if(isset($decline['receiverHeightId']))echo $heightArray[$decline['receiverHeightId']]; ?></div>
+					<div class="pDetails"><?php if(isset($decline['receiverReligion']))echo $decline['receiverReligion'] ;?>, <?php if(isset($decline['receiverCaste']))echo $decline['receiverCaste'] ;?>, <?php echo $decline['receiverAge']; ?> Years - <?php if(isset($decline['receiverHeightId']))echo $heightArray[$decline['receiverHeightId']]; ?></div>
 					<div class="pDetails"><?php if(isset($decline['receiverPlace']))echo $decline['receiverPlace'] ;?>, <?php if(isset($decline['receiverState']))echo $decline['receiverState'] ;?>, <?php if(isset($decline['receiverCountry']))echo $decline['receiverCountry'] ;?></div>
 					<?php if($decline['receiverId'] == $user->userId){?>
 					<div class="pAction">You declined her interest on<?php echo $decline['sendDate']; ?></div>

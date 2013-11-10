@@ -207,6 +207,14 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $("#userContact").validationEngine('attach');
+
+    $("input:reset").click(function() {       // apply to reset button's click event
+        this.form.reset();                    // reset the form
+        // clear the form error validations      
+    	$("#userContact").validationEngine('hideAll');
+         return false;                         // prevent reset button from resetting again
+    });
+    
   });
 
 

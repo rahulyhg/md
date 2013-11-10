@@ -299,6 +299,7 @@ class SearchController extends Controller
 	//search from front page
 	public function actionBasic()
 	{
+		$this->paginationCheck();
 		$searchText = "";
 		$user = Yii::app()->session->get('user');
 			
@@ -411,7 +412,15 @@ class SearchController extends Controller
 				$scondition = " userId in ({$userList}) ";
 				if(isset($blockIdList) && !empty($blockIdList))
 				$scondition .= " AND userId NOT IN({$blockIdList})";
-				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC'),'active=1');
+				
+				$getPaginatedUserList = $this->pagination(sizeof($usersV),$scondition);
+				$users = isset($getPaginatedUserList['user']) ? $getPaginatedUserList['user'] : array();
+				if(sizeof($users) > 0){
+					Yii::app()->session['searchResultTotalRows'] = sizeof($usersV);
+					Yii::app()->session['searchCriteria'] = $scondition;
+				}
+				
+				//$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC'),'active=1');
 
 				$highLightUser = array();
 				$normalUser = array();
@@ -431,7 +440,8 @@ class SearchController extends Controller
 					$totalUser = sizeof($normalUser);
 					$totalPage = ceil($totalUser/10);
 				}
-				$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));
+				//$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));
+				$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));
 			}
 			else
 			{
@@ -462,6 +472,7 @@ class SearchController extends Controller
 	//basic search from the search page
 	public function actionRegular()
 	{
+		$this->paginationCheck();
 		$searchText = "";
 		$user = Yii::app()->session->get('user');
 		if(isset($_POST) && !empty($_POST))
@@ -624,9 +635,20 @@ class SearchController extends Controller
 		}
 			
 			$users = array();
-		
-			if(!empty($userList))
-			$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ));
+
+			//if(!empty($userList))
+			//$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ));
+
+			/* new code for pagination */
+			if(!empty($userList)){
+				$getPaginatedUserList = $this->pagination(sizeof($usersV),$scondition);
+				$users = isset($getPaginatedUserList['user']) ? $getPaginatedUserList['user'] : $users;
+				if(sizeof($users) > 0){
+					Yii::app()->session['searchResultTotalRows'] = sizeof($usersV);
+					Yii::app()->session['searchCriteria'] = $scondition;
+				}
+			}
+			
 		
 			$highLightUser = array();
 			$normalUser = array();
@@ -642,8 +664,8 @@ class SearchController extends Controller
 				
 			$totalUser = sizeof($normalUser);
 			$totalPage = ceil($totalUser/10);	
-			$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));	
-		
+//			$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));	
+			$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));		
 			}
 			else 
 			{
@@ -670,8 +692,99 @@ class SearchController extends Controller
 		}
 	}
 	
-	public function actionQuick(){
+	private function paginationCheck(){
+		if(isset($_GET['page']) && !empty($_GET['page'])){
+			if(isset(Yii::app()->session['searchResultTotalRows']) && !empty(Yii::app()->session['searchResultTotalRows'])
+			   && isset(Yii::app()->session['searchCriteria']) && !empty(Yii::app()->session['searchCriteria'])){				
+				$getPaginatedUserList = $this->pagination();
+				if(isset($getPaginatedUserList['user']) && sizeof($getPaginatedUserList['user']) > 0){
+					$users = $getPaginatedUserList['user'];
+					$highLightUser = array();
+					$normalUser = array();
+					foreach ($users as $key => $value) {
+						if($value->highlighted == 1 )
+						$highLightUser[] = $value;
+						else 
+						$normalUser[] = $value;
+					}
+					
+					$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));
+					Yii::app()->end();
+				}
+				else{
+					$this->redirect('/search');
+				}
+			}
+			else{
+				$this->redirect('/search');
+			}
+		}
+	}
+
+    private function pagination($numrows = 0,$scondition = '') {
 		
+		$numrows = ($numrows == 0) ? Yii::app()->session['searchResultTotalRows'] : $numrows;
+		$scondition = ($scondition == '') ? Yii::app()->session['searchCriteria'] : $scondition;
+		
+		$page = $users = array();
+		$rowsPerPage = 10;
+		$page_num = isset($_GET['page']) ? $_GET['page'] : 0;
+		
+		if($page_num == 0) {
+			$offset = 0;
+			$page_num = 1; 
+		}else{
+			$offset = $page_num * $rowsPerPage;
+		}
+		$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => $rowsPerPage,'offset'=>$offset ));
+		
+		$numofpages = floor($numrows/$rowsPerPage); 
+		
+		$self = $page_pagination = ""; 
+		
+		if ($numofpages >= '1' ) { 
+			$range = 10; 
+			$range_min = ($range % 2 == 0) ? ($range / 2) - 1 : ($range - 1) / 2; 
+			$range_max = ($range % 2 == 0) ? $range_min + 1 : $range_min; 
+			$page_min = $page_num- $range_min; 
+			$page_max = $page_num+ $range_max; 
+		
+			$page_min = ($page_min < 1) ? 1 : $page_min; 
+			$page_max = ($page_max < ($page_min + $range - 1)) ? $page_min + $range - 1 : $page_max; 
+			if ($page_max > $numofpages) { 
+				$page_min = ($page_min > 1) ? $numofpages - $range + 1 : 1; 
+				$page_max = $numofpages; 
+			} 
+		
+			$page_min = ($page_min < 1) ? 1 : $page_min;
+			
+			if ( ($page_num > ($range - $range_min)) && ($numofpages > $range) ) { 
+				$page_pagination .= '<li class="first"><a title="First" href="?page=1">First</a></li>'; 
+			} 
+		
+			if ($page_num != 1) { 
+				$page_pagination .= '<li class="previous"><a href="?page='.($page_num-1). '">Previous</a></li>'; 
+			} 
+			for ($i = $page_min;$i <= $page_max;$i++) { 
+				if ($i == $page_num) 
+				$page_pagination .= '<li class="page selected"><a>' . $i . '</a></li>'; 
+				else 
+				$page_pagination.= '<li class="page"><a href="?page='.$i. '">'.$i.'</a></li>'; 
+			} 		
+			if ($page_num < $numofpages) { 
+				$page_pagination.= '<li class="pgNext"><a href="?page='.($page_num + 1) . '">Next</a></li>'; 
+			}
+			if (($page_num< ($numofpages - $range_max)) && ($numofpages > $range)) { 
+				$page_pagination .= '<li class="last"><a title="Last" href="?page='.$numofpages. '">Last</a></li>'; 
+			} 
+			$page['PAGINATION'] ='<ul class="Pagination">'.$page_pagination.'</ul>';
+			$page['user'] = $users;
+			return $page;
+		}
+	}
+	
+	public function actionQuick(){
+		$this->paginationCheck();
 		$user = Yii::app()->session->get('user');
 
 		if(isset($user)){
@@ -725,7 +838,15 @@ class SearchController extends Controller
 				$scondition = " userId in ({$userList}) ";
 				if(isset($blockIdList) && !empty($blockIdList))
 				$scondition .= " AND userId NOT IN({$blockIdList})";
-				$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
+				
+				$getPaginatedUserList = $this->pagination(sizeof($usersV),$scondition);
+				$users = isset($getPaginatedUserList['user']) ? $getPaginatedUserList['user'] : array();
+				if(sizeof($users) > 0){
+					Yii::app()->session['searchResultTotalRows'] = sizeof($usersV);
+					Yii::app()->session['searchCriteria'] = $scondition;
+				}
+				
+				//$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
 
 
 				$highLightUser = array();
@@ -742,7 +863,8 @@ class SearchController extends Controller
 				{
 					$totalUser = sizeof($normalUser);
 					$totalPage = ceil($totalUser/10);
-					$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));
+					//$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));
+					$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));
 				}
 			}
 			else
@@ -776,6 +898,7 @@ class SearchController extends Controller
 			$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'save'));
 		}
 		*/
+		$this->paginationCheck();
 		$user = Yii::app()->session->get('user');
 		$searchFor = null;
 		$searchText = "";
@@ -1057,8 +1180,16 @@ class SearchController extends Controller
 		
 		$users = array();
 		
-		if(!empty($userList))
-		$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
+		//if(!empty($userList))
+		//$users = Users::model()->findAll(array('condition'=>$scondition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
+		if(!empty($userList)){
+			$getPaginatedUserList = $this->pagination(sizeof($usersV),$scondition);
+			$users = isset($getPaginatedUserList['user']) ? $getPaginatedUserList['user'] : $users;
+			if(sizeof($users) > 0){
+				Yii::app()->session['searchResultTotalRows'] = sizeof($usersV);
+				Yii::app()->session['searchCriteria'] = $scondition;
+			}
+		}
 		
 		
 		if(sizeof($users) > 0 )
@@ -1074,8 +1205,8 @@ class SearchController extends Controller
 		}	
 		$totalUser = sizeof($normalUser);
 		$totalPage = ceil($totalUser/10);	
-		$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));	
-	
+		//$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));	
+		$this->render('search',array('searchText'=>$searchText,'highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));
 		}
 		else
 		{
@@ -1171,6 +1302,7 @@ class SearchController extends Controller
 	}
 	public function actionKeyword()
 	{
+		$this->paginationCheck();
 		$user = Yii::app()->session->get('user');
 		if(isset($_POST['keyword']))
 		{
@@ -1224,7 +1356,14 @@ class SearchController extends Controller
 				
 			}
 			
-		$users = Users::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
+		$usersV = Users::model()->findAll(array('condition'=>$condition,'order'=> 'createdOn DESC','limit' => 200 ),'active=1');
+		
+		$getPaginatedUserList = $this->pagination(sizeof($usersV),$condition);
+		$users = isset($getPaginatedUserList['user']) ? $getPaginatedUserList['user'] : array();
+		if(sizeof($users) > 0){
+			Yii::app()->session['searchResultTotalRows'] = sizeof($usersV);
+			Yii::app()->session['searchCriteria'] = $condition;
+		}
 		
 		$highLightUser = array();
 		$normalUser = array();
@@ -1241,7 +1380,8 @@ class SearchController extends Controller
 			
 		$totalUser = sizeof($normalUser);
 		$totalPage = ceil($totalUser/10);	
-		$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));	
+		//$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','totalUser'=>$totalUser,'totalPage' => $totalPage));
+		$this->render('search',array('highLight' => $highLightUser,'normal'=> $normalUser,'search'=>'regular','pagination'=>$getPaginatedUserList['PAGINATION']));
 		}
 		else
 		{

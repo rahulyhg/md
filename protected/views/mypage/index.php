@@ -296,8 +296,6 @@ $bookMarked = array();
 				<div class="for">For 3 Months</div>
 			</div>
 		</aside>
-		
-		
 		<?php $percent = Yii::app()->session->get('percentage');?>
 			
 		<div class="highlightBox pComplete">
@@ -305,7 +303,7 @@ $bookMarked = array();
 			<a href="/mypage/profile" class="upload">Update My Profile</a>
 		</div>
         <h1 class="width100 mTB12">Quick Search</h1>
-         <form id="quickSearch"  name="quickSearch" method="post"  action="/search/quick">
+        <form id="quickSearch"  name="quickSearch" method="post"  action="/search/quick">
         <ul class="accOverview mT12">
 			<li class="mB10">
 				<div class="radC">

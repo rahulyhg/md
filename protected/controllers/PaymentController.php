@@ -40,7 +40,7 @@ class PaymentController extends Controller
 			$newStart = false;
 			$endDate = null;
 			$user->payment = Payment::model()->findAll(array('condition'=>"userId = {$user->userId}"));
-			if(isset($user->payment) && sizeof($user->payment) > 0  )
+			if(isset($user->payment) && sizeof($user->payment)>0  )
 			{
 				
 				$payments = $user->payment(array('order'=> 'startdate DESC limit 0,1'));

@@ -316,12 +316,95 @@ class Utilities
 	}
 	
 	public static function uploadFile($fileName,$path){
-		if(move_uploaded_file($fileName, $path)) { 
+		if(move_uploaded_file($fileName, $path)) {
+			   self::generate_resized_image($path);
 				return true;
 			} else{  
 				 return false;  
 			} 
 	}
+	
+   function generateCaptcha() {	
+	  if( !function_exists('gd_info') ) {
+		 throw new Exception('Required GD library is missing');
+	  }
+	  
+	  // Use milliseconds instead of seconds
+	  srand(microtime() * 100);
+	  
+	  // Generate CAPTCHA code if not set by user
+	  
+	  $captcha_config = array(
+			   'code' => '',
+			   'min_length' => 5,
+			   'max_length' => 5,
+			   'characters' => '1234567890');
+	  
+	  $captcha_config['code'] = '';
+	  $length = rand($captcha_config['min_length'], $captcha_config['max_length']);
+	  while( strlen($captcha_config['code']) < $length ) {
+		 $captcha_config['code'] .= substr($captcha_config['characters'], rand() % (strlen($captcha_config['characters'])), 1);
+	  }
+	  
+	  // Generate HTML for image src
+	  $image_src = '/site/captcha?_CAPTCHA&amp;ccT='.(base64_encode($captcha_config['code']));
+	  $image_src = '/' . ltrim(preg_replace('/\\\\/', '/', $image_src), '/');
+	  return array(
+		 'code' => $captcha_config['code'],
+		 'image_src' => $image_src
+	  );
+   }
+	
+   public function generate_resized_image($source_image_path) {
+	  //$resized_image_path = preg_replace('{\\.[^\\.]+$}', '.jpg', $source_image_path);
+	  $resized_image_path = $source_image_path;
+	  $RESIZE_IMAGE_MAX_WIDTH = 600;
+	  $RESIZE_IMAGE_MAX_HEIGHT = 600;
+	  list($source_image_width, $source_image_height, $source_image_type) = getimagesize($source_image_path);
+	  switch ($source_image_type) {
+		  case IMAGETYPE_GIF:
+			 $source_gd_image = imagecreatefromgif($source_image_path);
+			 break;
+		  case IMAGETYPE_JPEG:
+			 $source_gd_image = imagecreatefromjpeg($source_image_path);
+			 break;
+		  case IMAGETYPE_PNG:
+			 $source_gd_image = imagecreatefrompng($source_image_path);
+			 break;
+	  }
+	  if ($source_gd_image === false) {
+		 return false;
+	  }
+	  $source_aspect_ratio = $source_image_width / $source_image_height;
+	  $resized_aspect_ratio = $RESIZE_IMAGE_MAX_WIDTH / $RESIZE_IMAGE_MAX_HEIGHT;
+	  if ($source_image_width <= $RESIZE_IMAGE_MAX_WIDTH && $source_image_height <= $RESIZE_IMAGE_MAX_HEIGHT) {
+		 $resized_image_width = $source_image_width;
+		 $resized_image_height = $source_image_height;
+	  } elseif ($resized_aspect_ratio > $source_aspect_ratio) {
+		 $resized_image_width = (int) ($RESIZE_IMAGE_MAX_HEIGHT * $source_aspect_ratio);
+		 $resized_image_height = $RESIZE_IMAGE_MAX_HEIGHT;
+	  } else {
+		 $resized_image_width = $RESIZE_IMAGE_MAX_WIDTH;
+		 $resized_image_height = (int) ($RESIZE_IMAGE_MAX_WIDTH / $source_aspect_ratio);
+	  }
+	  $resized_gd_image = imagecreatetruecolor($resized_image_width, $resized_image_height);
+	  imagecopyresampled($resized_gd_image, $source_gd_image, 0, 0, 0, 0, $resized_image_width, $resized_image_height, $source_image_width, $source_image_height);
+	  switch ($source_image_type) {
+		  case IMAGETYPE_GIF:
+			 imagejpeg($resized_gd_image, $resized_image_path);
+			 break;
+		  default:
+		  case IMAGETYPE_JPEG:
+			 imagejpeg($resized_gd_image, $resized_image_path, 90);
+			 break;
+		  case IMAGETYPE_PNG:
+			 imagejpeg($resized_gd_image, $resized_image_path);
+			 break;
+	  }
+	  imagedestroy($source_gd_image);
+	  imagedestroy($resized_gd_image);
+	  return true;
+   }
 	
 	public static function getProfileImage($marryId,$imageName){
 		if($imageName != ''){

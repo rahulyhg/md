@@ -114,6 +114,7 @@
 					</div>
 					<div class="info">
 					<?php $records = Religion::model()->findAll("active = 1");
+  
 		$list = CHtml::listData($records, 'religionId', 'name');
 		echo CHtml::dropDownList('religion',null,$list,array('empty' => 'Religion','class'=>'validate[required] wid160')); ?>
 		<?php $records = Religion::model()->findAll("active = 1");

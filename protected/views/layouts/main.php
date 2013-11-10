@@ -15,21 +15,33 @@
     <!-- scripts widgets -->
 	<?php $this->widget('application.widgets.Scripts'); ?>
 	<!-- scripts ends -->
+	
+	<script type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</script>
 </head>
-<body>
-<!-- main content wrapper -->
-<div class="wrapper">
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
 	<!-- header section -->
     <header class="header">
 		<!-- login header -->
 		 <?php $this->widget('application.widgets.login.Header'); ?>
 		<!-- login header ends -->
 		<!-- menu -->
-		<?php if(Yii::app()->controller->id != 'user') {?>
-		<?php $this->widget('application.widgets.menu.Main');} ?> 
+		<section class="nav-sec">
+			<div class="md-wrap">
+			<?php if(Yii::app()->controller->id != 'user' && Yii::app()->controller->id != 'site') {?>
+				<?php $this->widget('application.widgets.menu.Main'); ?>
+			<?php } ?>
+			</div>
+		</section>
         <!-- menu ends -->
     </header>
     <!-- header ends -->
+<!-- main content wrapper -->
+<!--<div class="wrapper">-->
+<div class="md-wrap">
+	
     <!-- content -->
      <div class="ajax-progress"></div>
 	<?php echo $content; ?>
@@ -42,6 +54,15 @@
 <!-- social icons -->
 <?php $this->widget('application.widgets.Social'); ?>
 <!-- social icons ends -->
+
+<script type="text/javascript">
+//$(document).ready(function(){
+//    $(document).bind("contextmenu",function(e){
+//        return false;
+//    });
+//});
+
+</script>
 
 
 
