@@ -13,14 +13,14 @@
     float: left;
     font: normal 12px/12px verdana,helvetica,arial,sans-serif;
     color: #9775a6;
-    margin: 5px 0 6px;
+    margin:0px;
 }
 .data-contnr3 .search-result{
     width: 99%;
     float: left;
     font: normal 12px/16px helvetica,arial,sans-serif;
     color: #666;
-    margin: 5px 0 6px;
+    margin:0px;
 }
 .data-contnr3 .search-result span{
     font-weight: bold ;
@@ -30,7 +30,7 @@
     float: left;
     font: normal 22px/32px tahoma,verdana,helvetica,arial,sans-serif;
     color: #9775a7;
-    margin: 20px 0 5px;
+    margin: 10px 0 5px;
 }
 .data-contnr3 .pagination-contnr{
     width:100%;
@@ -460,7 +460,7 @@ a.sendMessage:hover{
     list-style: none;
 }
 .membership-contnr ul.tab-head li{
-    width:50%;
+    width:100%;
     float: left;
 }
 .membership-contnr ul.tab-head li a{
@@ -685,7 +685,7 @@ a.sendMessage:hover{
 .data-contnr{
     width: 710px;
     float: left;
-    min-height: 300px;
+    min-height: 410px;
     margin-bottom: 20px;
 }
 .data-contnr .congrats{

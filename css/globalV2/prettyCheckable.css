@@ -1,0 +1,31 @@
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {clear: both;}
+.clearfix {*zoom: 1;}
+.prettycheckbox,
+.prettyradio {
+    display: inline-block;
+    padding:0;
+    margin:0;
+    float: left;
+}
+.prettycheckbox a,
+.prettyradio a{
+    width: 37px;
+    height: 34px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin:0;
+}
+.prettyradio a {background:url("../../images/global/check.png") no-repeat 0 0}
+.prettyradio a.checked {background:url("../../images/global/checked.png") no-repeat 0 0}
+.prettycheckbox label,
+.prettyradio label {
+  display: block;
+  float: left;
+  margin: 0 !important;
+  cursor: pointer;
+}

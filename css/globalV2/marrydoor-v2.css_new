@@ -1,0 +1,339 @@
+.md-wrap{
+    width: 1000px;
+    margin: 0 auto;
+}
+/*header section styles*/
+header{
+    width: 100%;
+    float: left;
+    margin: 0 0 15px;
+}
+header .top-sec{
+    width: 100%;
+    height: 25px;
+    float: left;
+    background: #f3f3f3;
+}
+header .top-sec .welcome-contnr{
+    float: right;
+    margin: 5px 0 0;
+}
+header .top-sec .welcome-contnr li{
+    float: left;
+    position: relative;
+    padding: 0 6px;
+    font: 300 13px/14px 'Roboto',sans-serif;
+    color: #939598;
+}
+header .top-sec .welcome-contnr li:first-child{
+    border-right: 1px solid #ccc;
+}
+header .top-sec .welcome-contnr li:last-child{
+    padding-right: 0;
+}
+header .top-sec .welcome-contnr li a{
+    color: #1abaff;
+}
+header .top-sec .welcome-contnr li .sbID{
+    width: 296px;
+    height: 84px;
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px -4px #000;
+    position: absolute;
+    right: -25px;
+    top: 27px;
+    z-index: 777;
+}
+header .top-sec .welcome-contnr li .sbID .arrow {
+    border:solid 5px transparent;
+    border-top:solid 5px #888;
+    background: url("../../images/global/marrydoor.png") no-repeat scroll -735px 0 transparent;
+    height: 14px;
+    position: absolute;
+    right: 54px;
+    top: -14px;
+    width: 22px;
+}
+header .top-sec .welcome-contnr li .sbID .sbID-contnr{
+    float: left;
+    margin: 24px 0 0 20px;
+}
+header .top-sec .welcome-contnr li .sbID .sbID-contnr input[type="text"]{
+    width: 155px;
+    height: 32px;
+    float: left;
+    padding-left: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    font: 300 14px/15px 'Roboto',sans-serif;
+    color: #939598;
+}
+header .type2b{
+    width: 80px !important;
+    height: 34px  !important;
+    float: left  !important;
+    border: 0 none  !important;
+    background: #e6e6e6  !important;
+    font: 300 14px/15px 'Roboto',sans-serif  !important;
+    color: #7c51a1  !important;
+    margin: 0 !important;
+}
+header .type2b:hover{
+    background: #7c51a1  !important;
+    color: #fff !important;
+}
+header .top-sec .welcome-contnr li .sbID .sbID-contnr input[type="button"]{
+    width: 80px;
+    height: 34px;
+    float: left;
+    border: 0 none;
+    background: #e6e6e6;
+    font: 300 14px/15px 'Roboto',sans-serif;
+    color: #7c51a1;
+    margin: 0 0 0 10px;
+}
+header .top-sec .welcome-contnr li .sbID .sbID-contnr input[type="button"]:hover{
+    background: #7c51a1;
+    color: #fff;
+}
+header .main-sec{
+    width: 100%;
+    height: 100px;
+    float: left;
+}
+header .main-sec h1.logo {
+    background: url("../../images/global/logo.png") no-repeat 0 0;
+    float: left;
+    height: 86px;
+    margin: 10px 0 0;
+    width: 306px;
+}
+header .main-sec .login-contnr {
+    float: right;
+}
+header .main-sec .login-contnr .input-contnr{
+    float: left;
+    margin:32px 0 10px 10px;
+    position: relative;
+}
+header .main-sec .login-contnr input[type="text"],header .main-sec .login-contnr input[type="password"]{
+    width: 155px;
+    height: 32px;
+    float: left;
+    padding-left: 5px;
+    background: #fff;
+    border: 1px solid #efefef;
+    font: 300 14px/15px 'Roboto',sans-serif;
+    color: #939598;
+}
+header .main-sec .login-contnr input[type="button"]{
+    width: 80px;
+    height: 34px;
+    float: left;
+    border: 0 none;
+    background: #e6e6e6;
+    font: 300 14px/15px 'Roboto',sans-serif;
+    color: #7c51a1;
+}
+header .main-sec .login-contnr input[type="button"]:hover{
+    background: #7c51a1;
+    color: #fff;
+}
+header .main-sec .login-contnr a{
+    position: absolute;
+    bottom: -16px;
+    left: 0px;
+    font: 300 12px/13px 'Roboto',sans-serif;
+    color: #1abaff;
+}
+header .nav-sec{
+    width: 100%;
+    height: 30px;
+    float: left;
+    background: #f3f3f3;
+}
+/*home content area styles*/
+.home-contnr{
+    width: 100%;
+    min-height: 550px;
+    margin: 0 0 15px;
+    float: left;
+    background: url("../../images/global/home-bg.jpg") repeat 0 0;
+    position: relative;
+}
+.home-contnr .graphix{
+    width: 480px;
+    min-height: 550px;
+    float: left;
+}
+.home-contnr .graphix .malayalam{
+    width: 402px;
+    height: 290px;
+    position: absolute;
+    background: url("../../images/global/english.png") no-repeat 0 0;
+    left: 60px;
+    top: 85px;
+}
+.home-contnr .graphix .birds{
+    width: 379px;
+    height: 140px;
+    position: absolute;
+    background: url("../../images/global/birds.png") no-repeat 0 0;
+    left: 0px;
+    bottom: 20px;
+}
+.home-contnr .register-contnr{
+    width: 520px;
+    min-height: 550px;
+    float: left;
+    background: #f3f3f3;
+}
+.home-contnr .register-contnr hgroup{
+    width: 519px;
+    height: 48px;
+    float: left;
+    background: #fff;
+    border: 1px solid #efefef;
+    border-left: 0;
+}
+.home-contnr .register-contnr hgroup h2{
+    width: 100%;
+    float: left;
+    font: 300 30px/32px 'Roboto',sans-serif;
+    color: #1abaff;
+    text-align: center;
+    margin: 8px 0 0;
+}
+.home-contnr .register-contnr .reg-form{
+    width: 100%;
+    float: left;
+    margin: 20px 0;
+}
+.home-contnr .register-contnr .reg-form li{
+    width: 100%;
+    float: left;
+    margin: 6px 0;
+}
+.home-contnr .register-contnr .reg-form li .form-texts{
+    width: 145px;
+    float: left;
+    min-height: 20px;
+    font: 300 16px/32px 'Roboto',sans-serif;
+    color: #888;
+    text-align: right;
+}
+.home-contnr .register-contnr .reg-form li .form-texts .copy-text{
+    float: right;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding:0 12px;
+    font:300 16px/32px 'Roboto',sans-serif;
+    color: #888;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs{
+    width: 350px;
+    float: right;
+    min-height: 20px;
+}
+.home-contnr .register-contnr .reg-form li .form-name{
+    width: 138px !important;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs input[type="text"], .home-contnr .register-contnr .reg-form li .form-inputs input[type="password"]{
+    float: left;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding-left: 12px;
+    margin-right: 10px;
+    font:normal 14px/15px arial,sans-serif;
+    color: #afafaf;
+    vertical-align: middle;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs input[type="button"]{
+    width: 151px;
+    height: 34px;
+    float: left;
+    border: 0 none;
+    background: #e6e6e6;
+    font: 300 14px/15px 'Roboto',sans-serif;
+    color: #7c51a1;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs input[type="button"]:hover{
+    background: #7c51a1;
+    color: #fff;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs .gender-sec{
+    width: 152px;
+    float: left;
+    min-height: 20px;
+    margin-right: 10px;
+    font: 300 16px/32px 'Roboto',sans-serif;
+    color: #888;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs .gender-sec .gender-text{
+    float: left;
+    font: 300 16px/18px 'Roboto',sans-serif;
+    color: #888;
+    margin: 7px 0 0;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs span.date .chosen-container{
+    width: 60px !important;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs span.month .chosen-container{
+    width: 134px !important;
+}
+.home-contnr .register-contnr .reg-form li .form-inputs span.year .chosen-container{
+    width: 100px !important;
+}
+footer{
+    background: #7C51A1;
+    float: left;
+    height: 30px;
+    width: 100%;
+}
+footer .footer-link {
+    font: 300 12px/28px 'Roboto',sans-serif;
+    color: #888;
+    text-align: center;
+    color: #deb8ff;
+}
+footer .footer-link a{
+    font: 300 12px/28px 'Roboto',sans-serif;
+    color: #deb8ff;
+}
+
+/*home page check box custom style*/
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {clear: both;}
+.clearfix {*zoom: 1;}
+.prettycheckbox,
+.prettyradio {
+    display: inline-block;
+    padding:0;
+    margin:0;
+    float: left;
+}
+.prettycheckbox a,
+.prettyradio a{
+    width: 37px;
+    height: 34px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin:0;
+}
+.prettyradio a {background:url("../../images/global/check.png") no-repeat 0 0}
+.prettyradio a.checked {background:url("../../images/global/checked.png") no-repeat 0 0}
+.prettycheckbox label,
+.prettyradio label {
+  display: block;
+  float: left;
+  margin: 6px 5px;
+  cursor: pointer;
+}
+/*home page check box custom style END*/

@@ -1,0 +1,49 @@
+ul.Pagination{
+	float: right;
+	font-size:11px;
+	margin:0;
+}
+ul.Pagination li{
+	display:inline;
+	float: left;
+	margin: 0 2px 0 1px;
+	font: normal 10px/12px arial,tahoma,sans-serif;
+	color: #666;
+}
+ul.Pagination a:link,
+ul.Pagination a:visited {
+	float: left;
+	font: normal 10px/12px arial,tahoma,sans-serif;
+	color: #666;
+	text-decoration: none;
+	text-transform: capitalize;
+	border: 1px solid #E6E7E8;
+	background: #E6E7E8;
+	padding: 1px 3px 2px 3px;
+	box-shadow: 0 0 0 0;
+	margin: 0;
+}
+ul.Pagination .page a {
+	font-weight:normal;
+}
+ul.Pagination a:hover {
+	background:#876099;
+	color:#FFFFFF;
+	border:solid 1px #876099;
+}
+ul.Pagination .selected a {
+	float: left;
+	font: normal 10px/12px arial,tahoma,sans-serif;
+	text-decoration: none;
+	text-transform: capitalize;
+	padding: 1px 3px 2px 3px;
+	box-shadow: 0 0 0 0;
+	margin: 0;
+	border:solid 1px #876099;
+	background:#876099;
+	color:#FFFFFF;
+}
+ul.Pagination .hidden a {
+	border:solid 1px #DEDEDE;
+	color:#888888;
+}
